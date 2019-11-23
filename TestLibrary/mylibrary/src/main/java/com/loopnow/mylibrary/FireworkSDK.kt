@@ -1,8 +1,6 @@
 package com.loopnow.mylibrary
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.MainThread
 
 
@@ -19,21 +17,24 @@ class FireworkSDK constructor(){
 
 
         lateinit var singleton: FireworkSDK
-        var  tokenReceived = false
+
 
         @JvmStatic
-        fun debug(s: String) {
+        fun libDebug(s: String) {
             Log.v("SdkLog ", s)
         }
 
         @JvmStatic
-        fun initialized() : Boolean {
-            return ::singleton.isInitialized
-        }
-
-        @JvmStatic
         fun initialize(): FireworkSDK {
-            Log.d("test", "test ----")
+            synchronized(this) {
+                if (::singleton.isInitialized) {
+                    return singleton
+                } else {
+                    if(!::singleton.isInitialized) {
+                        singleton = FireworkSDK()
+                    }
+                }
+            }
             return singleton
         }
     }
