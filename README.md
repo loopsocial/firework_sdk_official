@@ -82,32 +82,3 @@ When user clicks on one of the thumbnails from the video feed integrated in your
 <activity android:name="com.loopnow.fireworklibrary.PlaybackActivity" />
                 
 
-
-
-
-# ExampleJava / ExampleKotlin
-The example shows you how to use Firework SDK APIs to load video feeds and play with Firework player.
-
-Use ```initialize()``` to initialize Firework SDK, add appid which you received at the time of registering your application.
-
-	fun initialize(applicationContext: Context,
-                       appid: String,
-                       listener: FireworkInitStatusListener): FireworkSDK
-	
-Use ```getFeed()``` to get video feed. The response will contain 10 videos.
-
-	fun getFeed(): LiveData<Result>
-
-
-Use ```loadNext()``` to get next 10 videos.
-
-	fun loadNext()
-
-Use ```playVideo()``` to play video:
-* Get your initial feed by ```getFeed()``` 
-* Pass the position as a initial video on the player by playVideo().  
-
-	```
-	fun playVideo(context: Context, position: Int)
-
-
