@@ -85,11 +85,11 @@ When user clicks on one of the thumbnails from the video feed integrated in your
 # Video Playback Fragment 
 In case you want to integrate full screen video playback without the video feed ( thumbnails ), you can add FireworkPlayerFragment to your view hierarchy. Users can swipe right to watch the next video and swipe left to watch previous video if any available. 
 
-		<fragment android:name="com.loopnow.fireworklibrary.views.FireworkPlayerFragment"
-        		  android:layout_width="match_parent"
-        		  android:layout_height="match_parent"
-        		  app:appid="provide_your_app_id"
-        		  android:id="{your_fragment_id}"
-        		/>
+	<fragment android:name="com.loopnow.fireworklibrary.views.FireworkPlayerFragment"
+		  android:layout_width="match_parent"
+		  android:layout_height="match_parent"
+		  app:appid="provide_your_app_id"
+		  android:id="{your_fragment_id}"
+		/>
 
 
