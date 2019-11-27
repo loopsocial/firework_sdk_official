@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
+
+
+    <FrameLayout android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="@dimen/padding_8"
+        android:id="@+id/pinned_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.30"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        >
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.loopnow.fireworklibrary.views.VideoFeedFragment"
+            app:feedLayout="horizontal"
+            app:columns="2"
+            app:showTitle="false"
+            app:appid="TIjq0YITcyqaz_zicjWpkx95gz_HAkzl"
+            app:page_type="feed"
+            app:bundle_id="com.loopnow.fireworkdemo"
+            android:id="@+id/pinned_videofeed"
+            android:tag="pinned_fragment"
+            />
+    </FrameLayout>
+
+
+    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:id="@+id/pinned_recycler_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/pinned_container"
+    />
+
+
+</android.support.constraint.ConstraintLayout>
+
