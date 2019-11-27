@@ -8,7 +8,7 @@ To integrate firework_sdk in your applicaiton, you will have to register your ap
 Coming soon
 
 # How to use firework_sdk?
-firework_sdk provides two options to integrate Firework video feed in your application. It provides easy to use out of box solution wrapped in firework video feed ```fragment``` with limited control over UX/UI that you can drop in your view hierarchy as well as APIs for you to request raw data that you can render it yourself for the complete control over UX/UI. 
+firework_sdk provides two options to integrate Firework video feed in your application. It provides easy to use out of box solution wrapped in firework video feed ```fragment``` with limited control over UX/UI that you can drop in your view hierarchy as well as APIs for you to request raw data that you can render it yourself for the complete control over UX/UI. The later solution is still in works and will be available soon.  
 
 * Fragment: 
 
@@ -78,7 +78,18 @@ When VideoFeedFragment is used, it handles pagination and continuously fetches f
 
 
 # Video Playback
-When user clicks on one of the thumbnails from the video feed integrated in your application, Firework_sdk handles the onClick event and starts the video playback. You will have to include PlaybackActivity in your AndroidManifest file. 
+When user clicks on one of the thumbnails from the video feed integrated in your application, firework_sdk handles the onClick event and starts the video playback. You will have to include PlaybackActivity in your AndroidManifest file. 
 <activity android:name="com.loopnow.fireworklibrary.PlaybackActivity" />
                 
+
+# Video Playback Fragment 
+In case you want to integrate full screen video playback without the video feed ( thumbnails ), you can add FireworkPlayerFragment to your view hierarchy. Users can swipe right to watch the next video and swipe left to watch previous video if any available. 
+
+		<fragment android:name="com.loopnow.fireworklibrary.views.FireworkPlayerFragment"
+        		  android:layout_width="match_parent"
+        		  android:layout_height="match_parent"
+        		  app:appid="provide_your_app_id"
+        		  android:id="{your_fragment_id}"
+        		/>
+
 
