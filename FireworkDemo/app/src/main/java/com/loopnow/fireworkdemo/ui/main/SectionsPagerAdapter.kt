@@ -1,18 +1,20 @@
 package com.loopnow.fireworkdemo.ui.main
 
 import android.content.Context
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.loopnow.fireworkdemo.R
+import com.loopnow.fireworklibrary.Key
 import com.loopnow.fireworklibrary.views.FireworkPlayerFragment
 
 private val TAB_TITLES = arrayOf(
         R.string.integrated,
         R.string.pinned,
         R.string.grid,
-        R.string.vertical
-        //R.string.player
+        R.string.vertical,
+        R.string.player
 )
 
 /**
@@ -22,50 +24,76 @@ private val TAB_TITLES = arrayOf(
 class SectionsPagerAdapter(private val context: Context, val fm: FragmentManager)
     : FragmentPagerAdapter(fm) {
 
+    var current = 0
+    var lastPage = 0
+
+    val fragmentMap = HashMap<Int, Fragment>()
+
+
     override fun getItem(position: Int): Fragment {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
 
-        return when(position) {
+        return when (position) {
 
             0 -> {
-                var fragment = fm.findFragmentById(R.id.integrated_videofeed)
-                if(fragment == null) {
-                    fragment = IntegratedFragment.newInstance()
+                if (!fragmentMap.containsKey(position)) {
+                    val fragment = IntegratedFragment.newInstance()
+                    fragmentMap[position] = fragment
                 }
-                fragment
+                fragmentMap[position]!!
+            }
 
-            }
             1 -> {
-                var fragment = fm.findFragmentById(R.id.pinned_videofeed)
-                if(fragment == null) {
-                    fragment = PinnedFragment.newInstance()
+                if (!fragmentMap.containsKey(position)) {
+                    fragmentMap[position] = PinnedFragment.newInstance()
                 }
-                fragment
+                fragmentMap[position]!!
             }
+
             2 -> {
-                var fragment = fm.findFragmentById(R.id.grid_videofeed)
-                if(fragment == null) {
-                    fragment = GridFragment.newInstance()
+                if (!fragmentMap.containsKey(position)) {
+                    fragmentMap[position] = GridFragment.newInstance()
                 }
-                fragment
+                fragmentMap[position]!!
             }
             3 -> {
-                var fragment = fm.findFragmentById(R.id.vertical_videofeed)
-                if(fragment == null) {
-                    fragment = VerticalFragment.newInstance()
+                if (!fragmentMap.containsKey(position)) {
+                    fragmentMap[position] = VerticalFragment.newInstance()
                 }
-                fragment
+                fragmentMap[position]!!
             }
 
-            else  -> {
-                var fragment = fm.findFragmentById(R.id.firework_player)
-                if(fragment == null) {
-                        fragment = FullscreenFragment.newInstance()
+            else -> {
+                if (!fragmentMap.containsKey(position)) {
+                    val fragment = FireworkPlayerFragment()
+                    fragment.autoPlay = false
 
+                    val bundle = Bundle()
+                    bundle.putString(Key.APP_ID, "TIjq0YITcyqaz_zicjWpkx95gz_HAkzl")
+
+                    fragment.arguments = bundle
+
+                    fragmentMap[position] = fragment
                 }
-                fragment
+                fragmentMap[position]!!
+
+
             }
+        }
+
+    }
+
+
+    fun setCurrentPage(page: Int) {
+        if(current == 4) {
+            (fragmentMap[4] as FireworkPlayerFragment).pausePlayback()
+        }
+        lastPage = current
+        current = page
+
+        if(current == 4 ) {
+            (fragmentMap[4] as FireworkPlayerFragment).startPlayback()
         }
 
     }
