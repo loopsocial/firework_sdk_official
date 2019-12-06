@@ -8,7 +8,7 @@ To integrate firework_sdk in your applicaiton, you will have to register your ap
 Coming soon
 
 # How to use firework_sdk?
-firework_sdk provides two options to integrate Firework video feed in your application. It provides easy to use out of box solution wrapped in firework video feed ```fragment``` with limited control over UX/UI that you can drop in your view hierarchy as well as APIs for you to request raw data that you can render it yourself for the complete control over UX/UI. The later solution is still in works and will be available soon.  
+firework_sdk provides two options to integrate Firework video feed in your application. It provides easy to use out of box solution wrapped in firework video feed ```fragment``` with limited control over UX/UI that you can drop in your view hierarchy as well as APIs for you to request raw data that you can render it yourself by leveraging VideoView provided in the SDK for the complete control over UX/UI.   
 
 * Fragment: 
 
@@ -71,6 +71,112 @@ app:imageStyle="@style/ThumbnailStyle"
 	<style name="ImageStyle" >
 	       <item name="android:radius">12dp</item>
 	</style>
+	
+	
+* VideoView
+
+Firework_sdk provides view VideoView that you can embed in your view hierarchy. You can have control over player UX/UI.
+VideoView provides api to pause - pause(), resume - resume(), seek -seek(milliseconds), get progress - getProgress(), set video to be played - setVideo(videoId)
+
+If you want to use VideoView, you have to first initialize fireworkSDK and request video feed. 
+
+	val fireworkSDK =
+     			FireworkSDK.initialize(applicationContext,
+                        appid,
+                        bundle_id,
+                        generateViewId(),
+                        object : FireworkInitStatusListener {
+                            override fun onInitializing() {
+                                // Initializing the Firework SDK.
+                            }
+
+                            override fun onInitCompleted() {
+                                // Firework SDK initialization completed.
+				// Request feed here 
+                               
+                            }
+
+                            override fun onInitFailed(error: String) {
+                                // Firework SDK initialization failed.
+                             
+                            }
+                        })
+			
+			
+As discussed earlier, you receive appid at the time of registering your application with Firework platform, bundle_id is the same as your package name specified in your AndroidManifest and provided at the time of registering your application. You also need to provide unique id, which here is created with generateViewId() but you can choose another way of creating it. The last argument is FireworkInitStatusListener. You will implement three methods 
+
+1. onInitializing()
+2. onInitCompleted()
+3. onInitFailed()
+
+Once you initialize SDK, you can request video feed. The example below demonstrates requesting feed and setting and updating data in the adapter.  
+
+	fireworkSDK.getVideoFeed().observe(this, Observer {
+            it?.let { result ->
+                when (result) {
+                    is FeedResult.Loading -> {
+                        // Data is being requested from server 
+                    }
+                    is FeedResult.Error -> {
+                        // Error encountered while requesting data 
+                    }
+                    is FeedResult.Videos -> {
+                        // Received data from server 
+			// we recommend calling the following method to apply the new recommendated video list order 
+                        //  fireworkSDK.preparePlayableList(adapter.videoList, result.videos, adapter.currentVideo, view_pager.offscreenPageLimit)
+			
+			if (adapter.videoList.size > 0) {
+                            fireworkSDK.preparePlayableList(adapter.videoList, result.videos, adapter.currentVideo, view_pager.offscreenPageLimit)
+                        } else {
+                            if (result.videos.isNotEmpty() && adapter.currentVideo == -1) {
+                                
+				adapter.setData(result.videos)
+                                view_pager.setCurrentItem(0, false)
+                                fireworkSDK.nowPlayingVideo(0, adapter.videoList[0])
+                                
+                            }
+                        }
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+            }
+        })
+    }
+
+If you are using view_pager and PagerAdapter, you can inflate your view hierarchy that contains videoview and set video to be played using setVideo method of VideoView. Please refer to example below. This will look different, depending on your view hierarchy. 
+
+	override fun instantiateItem(collection: ViewGroup, position: Int): Any {
+        	val video = videoList[position]
+        	val inflater = LayoutInflater.from(context)
+        	val layout = inflater.inflate(R.layout.playbackview_item, collection, false) as ViewGroup
+
+        	val videoView = if(layout.childCount > 0) layout.getChildAt(0) as VideoView else null
+
+        	videoView?.apply {
+            		setVideo(video)
+        	} 
+        	collection.addView(layout)
+        	return layout
+    	}
+
+For FireworkSDK to personalize the video recommendation, it is important to call method nowPlayingVideo of FireworkSDK. If you were using ViewPager you could do something like this - 
+
+
+
+	view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(p0: Int) {
+            }
+
+            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+            }
+
+            override fun onPageSelected(p0: Int) {
+                fireworkSDK.nowPlayingVideo(p0, adapter.videoList[p0])
+            }
+
+        })
+
+
 	
 
 # Pagination
