@@ -68,7 +68,7 @@ Note that the value of attribute lines is also applied to maxLines.
 
 6. imageStyle: An optional attribute that can be used to define corner radius of the image. At present, only radius is supported. 
 
-app:imageStyle="@style/ThumbnailStyle"
+```app:imageStyle="@style/ThumbnailStyle"```
 
 	<style name="ImageStyle" >
 	       <item name="android:radius">12dp</item>
