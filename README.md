@@ -1,8 +1,8 @@
 # FireworkSDK
-FireworkSDK is a library to integrate videos from ```Firework - short form video platform``` in your Android application. 
+FireworkSDK is a library to integrate video feeds from ```Firework - a short form video platform``` into your Android application. 
 
 # Prerequisites 
-To integrate FireworkSDK in your applicaiton, you will have to register your application with Firework platform. You will have to provide <package_name> of your application which can be the same as your application_id or different. Once you register your application, you will be provided with unique app_id. The unique app_id is required to authenticate client with Firework platform. Check more details about its usage in the later sections. 
+To integrate FireworkSDK into your applicaiton, you have to register your application with Firework platform. You have to provide <package_name> of your application which can be the same as your application_id or different. Once you register your application, you will be provided with unique app_id. The unique app_id is required to authenticate client with Firework platform. Check more details about its usage in the later sections. 
 
 # Download
 Coming soon
@@ -25,11 +25,10 @@ This is the quickest and easiest way to start seeing the Firework video feed in 
 	   			app:feedLayout="{grid | horizontal | vertical}"
 	  			app:columns="{number_of_columns_if_your_feedLayout_is_grid}"
 	   			app:textStyle="@style/{your_text_style_for_video_title}" 
-           			app:imageStyle="@style/{your_image_style_for_video_thumbnail}"
-	   			>
+           			app:imageStyle="@style/{your_image_style_for_video_thumbnail}">
 			</fragment>
 
-1. appid: This refers to app_id you received at the time of registering your application with Firework platform. FireworkSDK will throw exception in the absense of appid. It is a compulsory attribute. 
+1. appId: This refers to app_id you received at the time of registering your application with Firework platform. FireworkSDK will throw exception in the absense of appid. It is a compulsory attribute. 
 
 2. feedLayout: This is an optional attribute and specifies the layout for the video feed. feedLayout can take any one of the three availavble layouts. 
 
@@ -90,19 +89,16 @@ If you want to use VideoView, you have to first initialize FireworkSDK and reque
 
                             override fun onInitCompleted() {
                                 // Firework SDK initialization completed.
-				// Request feed here 
-                               
+				// Request feed here                               
                             }
 
                             override fun onInitFailed(error: String) {
-                                // Firework SDK initialization failed.
-                             
+                                // Firework SDK initialization failed.                       
                             }
                         })
 			
 			
-As discussed earlier, you receive appid at the time of registering your application with Firework platform, bundle_id is the same as your package name specified in your AndroidManifest and provided at the time of registering your application. You also need to provide unique id, which here is created with generateViewId() but you can choose another way of creating it. The last argument is FireworkInitStatusListener. You will implement three methods 
-
+As discussed earlier, you receive appId at the time of registering your application with Firework platform, bundle_id is the same as your package name specified in your AndroidManifest and provided at the time of registering your application. You also need to provide unique id, which here is created with generateViewId() but you can choose another way of creating it. The last argument is FireworkInitStatusListener. You will implement three callbacks
 1. onInitializing()
 2. onInitCompleted()
 3. onInitFailed()
@@ -130,8 +126,7 @@ Once you initialize SDK, you can request video feed. The example below demonstra
                                 
 				adapter.setData(result.videos)
                                 view_pager.setCurrentItem(0, false)
-                                fireworkSDK.nowPlayingVideo(0, adapter.videoList[0])
-                                
+                                fireworkSDK.nowPlayingVideo(0, adapter.videoList[0])                    
                             }
                         }
                         adapter.notifyDataSetChanged()
@@ -167,7 +162,6 @@ For FireworkSDK to personalize the video recommendation, it is important to call
             override fun onPageSelected(p0: Int) {
                 fireworkSDK.nowPlayingVideo(p0, adapter.videoList[p0])
             }
-
         })
 
 
@@ -188,8 +182,7 @@ In case you want to integrate full screen video playback without the video feed 
 		  android:layout_width="match_parent"
 		  android:layout_height="match_parent"
 		  app:appid="provide_your_app_id"
-		  android:id="{your_fragment_id}"
-		  >
+		  android:id="{your_fragment_id}">
 	</fragment>
 
 
