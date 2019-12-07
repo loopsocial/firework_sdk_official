@@ -1,18 +1,20 @@
-# firework_sdk
-firework_sdk is a library to integrate videos from ```Firework - short form video platform``` in your Android application. 
+# fireworkSDK
+fireworkSDK is a library to integrate videos from ```Firework - short form video platform``` in your Android application. 
 
 # Prerequisites 
-To integrate firework_sdk in your applicaiton, you will have to register your application with Firework platform. You will have to provide <package_name> of your application which can be the same as your application_id or different. Once you register your application, you will be provided with unique app_id. The unique app_id is required to authenticate client with Firework platform. Check more details about its usage in the later sections. 
+To integrate fireworkSDK in your applicaiton, you will have to register your application with Firework platform. You will have to provide <package_name> of your application which can be the same as your application_id or different. Once you register your application, you will be provided with unique app_id. The unique app_id is required to authenticate client with Firework platform. Check more details about its usage in the later sections. 
 
 # Download
 Coming soon
 
-# How to use firework_sdk?
-firework_sdk provides two options to integrate Firework video feed in your application. It provides easy to use out of box solution wrapped in firework video feed ```fragment``` with limited control over UX/UI that you can drop in your view hierarchy as well as APIs for you to request raw data that you can render it yourself by leveraging VideoView provided in the SDK for the complete control over UX/UI.   
+# How to use fireworkSDK?
+fireworkSDK provides two options to integrate Firework video feed in your application and drop in your view hierarchy.
+- Fragment: It provides out of box solution wrapped in Firedwork video feed fragment with limited control over UX/UI. 
+- VideoView: It provides a VideoView then you can render and complete control over UX/UI by yourself.
 
-* Fragment: 
+**Fragment:**
 
-This is the quickest and easiest way to start seeing the firework video feed in your applicaiton. The fragment will handle initializing ```FireworkSDK```, authenticating your applicaiton with ```Firework platform``` and displaying the video feed in your application. Add the following fragment to your view hierarchy with appropriate layout parameters and attributes and its done.  
+This is the quickest and easiest way to start seeing the Firework video feed in your applicaiton. The fragment will handle initializing ```FireworkSDK```, authenticating your applicaiton with ```Firework platform``` and displaying the video feed in your application. Add the following fragment to your view hierarchy with appropriate layout parameters and attributes and its done.  
 				
 			<fragment android:id="@+id/{your_fragment_id}"
 	   			android:name="com.loopnow.fireworklibrary.views.VideoFeedFragment"
@@ -27,31 +29,31 @@ This is the quickest and easiest way to start seeing the firework video feed in 
 	   			>
 			</fragment>
 
-1. appid : This refers to app_id you received at the time of registering your application with Firework platform. Firework_sdk will throw exception in the absense of appid. It is a compulsory attribute. 
+1. appid: This refers to app_id you received at the time of registering your application with Firework platform. fireworkSDK will throw exception in the absense of appid. It is a compulsory attribute. 
 
 2. feedLayout: This is an optional attribute and specifies the layout for the video feed. feedLayout can take any one of the three availavble layouts. 
 
-* horizontal : Will layout video feed as a single row, scrollable horizontally 
+* horizontal: Will layout video feed as a single row on a horizontal scrollable view. 
 
 	<img src="screenshots/Horizontal_video_list.png"  width="270" height="480">
 
-* vertical : Will layout video feed as a single column, scrollable vertically 
+* vertical: Will layout video feed as a single column on a vertical scrollable view.
 
 	<img src="screenshots/vertical.jpg"  width="270" height="480"> <img src="screenshots/vertical_with_title.jpg"  width="270" height="480">
 
 
-* grid : will layout video feed in a multiple rows x <columns> format scrollable vertically. If optional attribute app:columns is not specified, the number of columsn default to 2. 
+* grid: Will layout video feed in a multiple <rows> x <columns> format scrollable vertically. If optional attribute  ```app:columns``` is not specified, the default number of columns is 2. 
 
 	<img src="screenshots/grid.jpg"  width="270" height="480"> <img src="screenshots/grid_with_title.jpg"  width="270" height="480">
 
 
-3. columns : This is an optional attribute and is only relevant if feedLayout is grid. The default value of columns is 2. 
+3. columns: This is an optional attribute and is only relevant if feedLayout is grid and with default columns value 2. 
 
-4. showTitle: This is an optional attribute and can be either true or false. When true, video title is displayed below thumbnail. The default value is false and no title is displayed. The number of lines of title and the look and feel such as font, text color, text size can be customized with optional attribute app:textStyle
+4. showTitle: This is an optional attribute and can be either true or false. When true, video title is displayed below thumbnail. The default value is false and no title is displayed. The number of lines of title and the look and feel such as font, text color, and text size can be customized with optional attribute ```app:textStyle```.
 
-5. textStyle: An optional attribute but we highly recommend you provide style for the video title if you have showTitle attribute set to true. Below an example of textStyle.
+5. textStyle: An optional attribute but we highly recommend you provide style for the video title if you have showTitle attribute set to true. See textStyle example as below.
 
-app:textStyle="@style/VideoTitleStyle"
+```app:textStyle="@style/VideoTitleStyle"```
 
 	<style name="VideoTitleStyle">
         	<item name="android:textColor">#ff4a4a4a</item>
@@ -73,18 +75,14 @@ app:imageStyle="@style/ThumbnailStyle"
 	</style>
 	
 	
-* VideoView
+**VideoView**
 
 Firework_sdk provides view VideoView that you can embed in your view hierarchy. You can have control over player UX/UI.
 VideoView provides api to pause - pause(), resume - resume(), seek -seek(milliseconds), get progress - getProgress(), set video to be played - setVideo(videoId)
 
 If you want to use VideoView, you have to first initialize fireworkSDK and request video feed. 
 
-	val fireworkSDK =
-     			FireworkSDK.initialize(applicationContext,
-                        appid,
-                        bundle_id,
-                        generateViewId(),
+	val fireworkSDK = FireworkSDK.initialize(applicationContext, appid, bundle_id, generateViewId(),
                         object : FireworkInitStatusListener {
                             override fun onInitializing() {
                                 // Initializing the Firework SDK.
@@ -141,15 +139,13 @@ Once you initialize SDK, you can request video feed. The example below demonstra
                 }
             }
         })
-    }
 
-If you are using view_pager and PagerAdapter, you can inflate your view hierarchy that contains videoview and set video to be played using setVideo method of VideoView. Please refer to example below. This will look different, depending on your view hierarchy. 
+If you are using ViewPager and PagerAdapter, you can inflate your view hierarchy that contains videoview and set video to be played using setVideo method of VideoView. Please refer to example below. This will looks different, depending on your view hierarchy. 
 
 	override fun instantiateItem(collection: ViewGroup, position: Int): Any {
         	val video = videoList[position]
         	val inflater = LayoutInflater.from(context)
         	val layout = inflater.inflate(R.layout.playbackview_item, collection, false) as ViewGroup
-
         	val videoView = if(layout.childCount > 0) layout.getChildAt(0) as VideoView else null
 
         	videoView?.apply {
@@ -159,9 +155,7 @@ If you are using view_pager and PagerAdapter, you can inflate your view hierarch
         	return layout
     	}
 
-For FireworkSDK to personalize the video recommendation, it is important to call method nowPlayingVideo of FireworkSDK. If you were using ViewPager you could do something like this - 
-
-
+For fireworkSDK to personalize the video recommendation, it is important to call method nowPlayingVideo of fireworkSDK. If you were using ViewPager you could do something like this - 
 
 	view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {
@@ -177,19 +171,18 @@ For FireworkSDK to personalize the video recommendation, it is important to call
         })
 
 
-	
 
 # Pagination
 When VideoFeedFragment is used, it handles pagination and continuously fetches feed as user scrolls. But if you choose to get raw feed and render it youself, you will have to implement pagination. 
 
 
 # Video Playback
-When user clicks on one of the thumbnails from the video feed integrated in your application, firework_sdk handles the onClick event and starts the video playback. You will have to include PlaybackActivity in your AndroidManifest file. 
-<activity android:name="com.loopnow.fireworklibrary.PlaybackActivity" />
+When user clicks on one of the thumbnails from the video feed integrated in your application, fireworkSDK handles the onClick event and starts the video playback. You will have to include PlaybackActivity in your AndroidManifest file. 
+```<activity android:name="com.loopnow.fireworklibrary.PlaybackActivity" />```
                 
 
 # Video Playback Fragment 
-In case you want to integrate full screen video playback without the video feed ( thumbnails ), you can add FireworkPlayerFragment to your view hierarchy. Users can swipe right to watch the next video and swipe left to watch previous video if any available. 
+In case you want to integrate full screen video playback without the video feed (thumbnails), you can add FireworkPlayerFragment to your view hierarchy. Users can swipe right to watch the next video and swipe left to watch previous video if any available. 
 
 	<fragment android:name="com.loopnow.fireworklibrary.views.FireworkPlayerFragment"
 		  android:layout_width="match_parent"
