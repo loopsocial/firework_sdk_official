@@ -210,6 +210,8 @@ When you provide your custom layout, it is must that the layout includes TextVie
 k. app:enableShare - {true|false} if you specify enableShare=true , then sharing of the video is enabled. Share icon is placed at the right|bottom. By default enableShare is true and you can disable it by setting enableShare=false
 
 l. app:category : In case you only want to display videos from certain categories, you can specify one category here. Please note that there are only few categories available and by selecting a categoy you could missing out on millions of amazing videos. Please check with your account manager for the available categories. It is better to not include this attribute, in which case our recommendation engine would recommend videos based on the user interest.  
+For example
+app:category="Food"
 
 In case if you want to delay loading category and programatically set category, please include attribute 
 app:loadContent="false" in your XML defintion of VideoFeedView  and later set category programatically using VideoFeedView api loadContent("category name")
