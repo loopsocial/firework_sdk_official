@@ -1,6 +1,12 @@
 # Release notes #
 
-## v4.2.9 (2020-11-9) Recommended ## ( inherits 4.2.5 )  
+
+## v4.3.1 (2020-11-16) Recommended ## ( inherits 4.2.9 )
+1. Bug Fixes
+2. GAM support
+3. Improved response time by decoupling video request and ad request 
+
+## v4.2.9 (2020-11-9)   
 
 @Deprecated VideoFeedAdapter.OnItemClickListener 
 
