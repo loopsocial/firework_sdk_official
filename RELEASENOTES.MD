@@ -1,10 +1,15 @@
 # Release notes #
 
+## v4.4.0 ( 2020-12-07 ) 
+This is v4.3.9 release with exoplayer v2.9.6
 
-## v4.3.1 (2020-11-16) Recommended ## ( inherits 4.2.9 )
+## v4.3.9 (2020-12-03) Recommended ## ( inherits 4.3.1 )
 1. Bug Fixes
 2. GAM support
 3. Improved response time by decoupling video request and ad request 
+4. ExoPlayer version v2.11.7
+
+
 
 ## v4.2.9 (2020-11-9)   
 
