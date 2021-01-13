@@ -1,6 +1,6 @@
 # Release notes #
-## v4.6.3 ( 2021-01-11) 
-1. Sponsored tag support
+## v4.6.5 ( 2021-01-11) 
+1. Internationalization
 2. Bug fixes
 3. ExoPlayer version v2.11.7
 
