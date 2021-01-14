@@ -309,6 +309,21 @@ The sdk provides two sets of callback, the code below is self explanatory .
             }
 
         })
+	
+### Rewarrded Video Callback
+
+	/**
+         * Called when user watches videos for enough duration and earn a reward
+         * @param encodedId  Unique video id of firework video. If user watches advertsiement
+         * it can be null 
+         * @param rewardAmount the number of firework coins that user earned. 
+         */
+        FireworkSDK.addRewardListener(object: FireworkSDK.RewardListener {
+            override fun rewardEarned(encodedId: String?, rewardAmount: Int) {
+                Log.v("AdLog", " $encodedId  --> $rewardAmount")
+            }
+
+        }, "{pass the unique user id (String) }" )
 
 
 ### Pagination
