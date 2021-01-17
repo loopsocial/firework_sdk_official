@@ -6,7 +6,7 @@
 
 
 ## v4.6.8 ( 2020-12-07) 
-This is v4.3.9 release with exoplayer v2.9.6
+This is v4.6.7 release with exoplayer v2.9.6
 
 ## v4.3.9 (2020-12-03) Recommended ## ( inherits 4.3.1 )
 1. Bug fixes
