@@ -1,11 +1,11 @@
 # Release notes #
-## v4.6.7 ( 2021-01-11) 
+## v4.6.7 ( 2021-01-15) 
 1. Internationalization
 2. Bug fixes
 3. ExoPlayer version v2.11.7
 
 
-## v4.6.9 ( 2020-12-07) 
+## v4.6.9 ( 2020-01-16) 
 This is v4.6.7 release with exoplayer v2.9.6
 
 ## v4.3.9 (2020-12-03) Recommended ## ( inherits 4.3.1 )
