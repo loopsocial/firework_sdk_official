@@ -310,7 +310,7 @@ The sdk provides two sets of callback, the code below is self explanatory .
 
         })
 	
-### Rewarrded Video Callback
+### Rewarded Video Callback
 
 	/**
          * Called when user watches videos for enough duration and earn a reward
