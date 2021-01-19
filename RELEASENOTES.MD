@@ -1,4 +1,8 @@
 # Release notes #
+
+## v4.7.1 (2020-01-18) Recommended ## ( inherits 4.3.9 )
+1. Bug fixes
+
 ## v4.6.7 ( 2021-01-15) 
 1. Internationalization
 2. Bug fixes
