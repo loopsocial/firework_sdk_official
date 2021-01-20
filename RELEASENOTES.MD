@@ -5,8 +5,18 @@
 2. ExoPlayer versino v2.11.7
 
 
-## v4.7.0 ( 2020-01-16) 
+## v4.7.0 (2020-01-16) 
 This is v4.6.7 release with exoplayer v2.9.6
+
+## v4.6.1 (2020-01-05)
+Support cleaning up listener objects.
+
+For example:
+```
+   1.FireworkSDK.addVideoPlaybackStatusListener(null)
+   2.FireworkSDK.addSdkStatusListener(null)
+   3.FireworkSDK.addVideoPlaybackTracker(null)
+```
 
 ## v4.3.9 (2020-12-03) Recommended ## ( inherits 4.3.1 )
 1. Bug fixes
