@@ -107,7 +107,7 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
 
-    implementation project(path: ':fireworklibrary')
+    //implementation project(path: ':fireworklibrary')
 
     implementation fileTree(include: ['*.aar'], dir: 'libs')
 
