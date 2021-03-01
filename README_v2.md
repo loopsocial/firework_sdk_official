@@ -6,16 +6,16 @@ https://github.com/loopsocial/firework_sdk_official/blob/master/FireworkDemo.apk
 
 ### Prerequisites 
 To integrate FireworkSDK into your application, you have to register your application with Firework platform and get unique
-app_id. To get the app_id 
+clientId. To get the clientId 
 
 - [X] Provide your application's applicationId / package name to the business team / engineering team you are co-ordinating with. If your applicationId is different from package name, provide applicationId.
-- [X] We will email you the app_id.
+- [X] Our team will create clientId and share it with you.
 
-The app_id is used to authenticate your application with the server. Authentication will fail if your application's applicationId / package name is different from what you provided, or you use wrong app_id. 
+The clientId is used to authenticate your application with the server. Authentication will fail if your application's applicationId / package name is different from what you provided, or you use wrong clientId. 
  
 ### How to add library to your project? 
 
-Please select the appropriate version of firework sdk library. 
+Please select the appropriate version of firework sdk library. We currently support ExoPlayer version v2.9.6, v2.11.7, v2.12.1.
 
 https://github.com/loopsocial/firework_sdk_official/blob/master/RELEASENOTES.MD
 
@@ -38,12 +38,10 @@ https://github.com/loopsocial/firework_sdk_official/blob/master/RELEASENOTES.MD
 
 
 				// Service used for prefetching of next video , if all data for currently playing video is fetched. 
+				// If you do not want to enable prefetching, you can exclude thsi line from AndroidManifet.xml 
 				<service android:name="com.loopnow.fireworklibrary.views.CacheService" />
 				
-				// Instead of providing app_id in VideoFeedFragment xml , you can specify it in AndroidManifest.xml
-				<meta-data
-					android:name="Firework:AppID"
-					android:value="{app_id provided to you}" />
+			
 
 				// We plan on using advertising_id to improve target ads so that you can monetize better. 
 				// This is needed for to get advertising id using Android ad sdk.  
@@ -97,25 +95,36 @@ https://github.com/loopsocial/firework_sdk_official/blob/master/RELEASENOTES.MD
 		-keepclassmembers class com.loopnow.fireworklibrary.** { <fields>; }
 
 
+### Initializing Firework SDK 
+You have to initialize Firework SDK before you can use any of its features. You should initialize Firework SDK when application is launched/created. 
+
+ FwSDK.initialize(
+        applicationContext,
+        clientId,
+        userId,
+        sdkStatusListener
+ )
+ 
+ applicationContext : provide application context , we don't require activity context. 
+ clientId           : Pass the clientId provided to you by the business team you are working with. 
+ userId(optional)   : An id to uniquely identify device or user. In case you pass null, Android_ID is used.
+                      If id passed is not unique, it will affect the quality of content recommended to the user. 
+ sdkStatusListener  : Implementation of interface SdkStatusListener to track sdk events. 
+
 
 ### Integrating video feed in your application.  
 
-There are two ways of playing Firework videos in your application.  
-1. Display video thumbnails in one of the three available layouts; Vertical, Horizontal & Grid and let user scroll through the thumbnails and click on any to play the video. Once video starts to play user can swipe left or right to play previous or next video. 
-
-2. In the second way, you can skip including the thumbnails and straight away start playing the video. User can swipe left or right to play previous or next video. 
-
-
-### The following section discusses method 1. 
-
 ### VideoFeedView 
-If you want to display video thumbnails and start playing the video only after user clicks on one of them, then dropping in VideoFeedView in your view hierarchy is the easiest and quickest way to integrate firework video feed into your app. VideoFeedView displays thumbnails in one of three supported layouts: 
+
+You can integrate video feed in your application by adding VideoFeedView to your view hiearachy. VideoFeedView is a custom android view. You can specify of of three layouts for the VideoFeedView. 
 
 - Vertical
 - Horizontal
 - Grid
 
-Here is an example of VideoFeedView that you can modify according to your needs and add to view hierarchy. 
+
+Here is an XML snippet of VideoFeedView that you can customize to your needs and add to your view hierarchy. 
+
 
 			<com.loopnow.fireworklibrary.views.VideoFeedView
 	   			android:layout_width="{desired_width}"
@@ -123,15 +132,19 @@ Here is an example of VideoFeedView that you can modify according to your needs 
 	   			app:showTitle="{true or false}"
 	   			app:feedLayout="{grid | horizontal | vertical}"
 	  			app:columns="{number_of_columns_if_your_feedLayout_is_grid, default value is 2}"
-				app:category="{This is in most case not required, please check with your account manager for available categories}"
 	   			app:textStyle="@style/{your_text_style_video_title}"
 				app:imageStyle="@style/{your_image_style_video_thumbnail}"
+				app:feedType="{discover | channel}"
+				app:feedParam="{channel id when feedType is channel}"
+				app:feedId={integer id to uniquely identify feed, it is different from view id}
 			/> 
 			
 			
 				
 - {desired_width} : Specify the basic width of the view, this is required attribute. 
 - {desired_height} : Specify the basic height of the view, this is required attribute. 
+
+
 - app:feedLayout={grid | horizontal | vertical} : This attribute specifies the layout for displaying thumbnails. The possible values are 
 		
 a. Grid -  Will layout video feed in a multiple ```rows> x <columns>``` format. 
