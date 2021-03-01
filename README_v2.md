@@ -192,7 +192,7 @@ We recommend using layout_height="match_parent" when feedLayout is specified as 
 
 [x] app:showTitle : Use it to display video caption. If true, video caption is displayed, hidden otherwise. The default value is false.  The position of the title is controlled by the attribute ```app:titlePosition```. The text style applied to title, can be specified with optional attribute ```app:textStyle```. 
 
-f. app:textStyle - This is an optional attribute and when specified the style is applied to TextView displaying video title. If textStyle is not specified default style is applied. Below is the example of TextStyle usage. 
+[x] app:textStyle : Provide custom textStyle to be applied to TextView displaying video caption. Please refer below for an example and usage. 
 	
 	```app:textStyle="@style/VideoTitleStyle"```
 
@@ -207,10 +207,10 @@ f. app:textStyle - This is an optional attribute and when specified the style is
    	</style>
   
 
-g. app:titlePosition - {alignBottom:below}: When attribute showTitle is set to true, then app:titlePosition="alignBottom" will align the bottom of TextView displaying title to the bottom of the thumbnail and app:titlePosition="below" will align the top of the TextView displaying title to the bottom of the thumbnail. 
+[x] app:titlePosition : When attribute showTitle is set to true,  app:titlePosition="alignBottom" will align the bottom of TextView displaying title to the bottom of the thumbnail and app:titlePosition="below" will align the top of the TextView displaying title to the bottom of the thumbnail. 
 
 
-h. imageStyle - An optional attribute that can be used to define corner radius of the image. At present, only radius is supported. 
+[x] imageStyle : You can specify corner radus by providing image style. Refer to an example below. The default radius is 10dp 
 
 ```app:imageStyle="@style/ThumbnailStyle"```
 
@@ -218,64 +218,95 @@ h. imageStyle - An optional attribute that can be used to define corner radius o
 	       <item name="android:radius">12dp</item>
 	</style>
 	
-i. app:gutterSpace - When you use layout="grid", gutterSpace is the space between two consecutive columns & rows. By default it is 8dp but you can customize it. 
+[x] app:gutterSpace : When you use layout="grid", gutterSpace is the space between two consecutive columns & rows. By default it is 8dp but you can customize it. 
 
 		<com.loopnow.fireworklibrary.views.VideoFeedView"                  
 			app:gutterSpace="{your_desired_value e.g 4dp}"
         		/>
 
-j. app:itemLayout - In VideoFeedView, you can overwrite the default layout used for the feed items i.e thumbnail. Use attribute itemLayout to provide custom layout. 
 
-		<com.loopnow.fireworklibrary.views.VideoFeedView
-                  	app:itemLayout="@layout/{your_custom_layout}
-        		/>
-When you provide your custom layout, it is must that the layout includes TextView with id caption and ImageView with id thumbnail. 
+[x] app:enableShare : When set to true, ```Share``` feature is enabled. User can click on the share icon displayed at the bottom of the video to share the video url via apps that support sending text/url. It is enabled by default. You can disable it by setting it to false. 
 
-k. app:enableShare - {true|false} if you specify enableShare=true , then sharing of the video is enabled. Share icon is placed at the right|bottom. By default enableShare is true and you can disable it by setting enableShare=false
+[x] app:autoPlayOnFeed : You can enable autoplaying of the video without volume by setting app:autoPlayOnFeed to true. It is set to false by default.   
 
-l. app:category : In case you only want to display videos from certain categories, you can specify one category here. Please note that there are only few categories available and by selecting a categoy you could missing out on millions of amazing videos. Please check with your account manager for the available categories. It is better to not include this attribute, in which case our recommendation engine would recommend videos based on the user interest.  
-For example
-app:category="Food"
+[x] app:autoPlayOnComplete -  When set to true, the next video will start playing as soon as currently playing video finishes playing. When it is set to false, the currently playing video continues to play in the loop.  
 
-In case if you want to delay loading category and programatically set category, please include attribute 
-app:loadContent="false" in your XML defintion of VideoFeedView  and later set category programatically using VideoFeedView api loadContent("category name")
-e.g videoFeedView.loadContent("food")
-
-k. app:autoPlayOnFeed - {true | false } The default value is true.  In the VideoFeedView , one of the thumbnails will start playing video without audio and if you don't want this behavior you can turn it off by including this attribute in VideoFeedView. 
-
-m. app:autoPlayOnComplete - { true | false } The default value is false. When video is playing in full screen mode, if you want next video to play as soon as the current one finishes playing then include this attribute in VideoFeedView and set value to true 
+### Event Callsback 
 
 
-### FireworkPlayerFragment 
-
-The first approach using VideoFeedFragment displays video thumbnails and plays video once user clicks on one of the thumbnails but if you don't want to display thumbnails and start playing the video right away, you should drop FireworkPlayerFragment into your view hierarchy. User can swipe right to go to next video and swipe left to go to previous video. 
-
-		<fragment android:layout_width="match_parent"
-            		android:layout_height="match_parent"
-            		android:name="com.loopnow.fireworklibrary.views.FireworkPlayerFragment"
-            		app:appid="{your_app_id}"
-            		android:id="@+id/{your_fragment_id}"
-            		android:tag="player_fragment"
-           		/>
+[x] Sdk Status Callback
 
 
+interface SdkStatusCallback {
+  fun currentStatus(status : SdkStatus, extra: String) 
+}
 
-### Callbacks 
+enum class SdkStatus() {
+    Initialized, // Sdk Initialized 
+    InitializationFailed, // Sdk initialization failed, in this case you shouldn't add VideoFeedView to your view hiearchy. Extra will describe the error. 
+    LoadingContent, // Sdk is requesting content from the server 
+    LoadingContentFailed, // Failed to load content, extra will have number of videos present in the feed at the time when error occured 
+    ContentLoaded // Content loaded successfully. 
+}
 
-The sdk provides two sets of callback, the code below is self explanatory . 
-     
-      FireworkSDK.addVideoPlaybackTracker(object: FireworkSDK.VideoPlaybackTracker {
-            override fun videoWatched(title: String, id: String, duration: Float) {
-                // title and duration for which video was  watched 
-            }
 
-            override fun nowPlaying(title: String, id: String, duration: Float) {
+[x] Playback Event Callback 
+ 
+
+interface VideoEventListener {
+    fun event(eventName: String, jsonObject: JSONObject)
+}
+
+events : 
+
+- "video-impression" : Fired when video is shown to the user 
+- "video-start" : Fired when video has played 1 second 
+- "video-first-quartile" : Fired when 25% of the video is played.  
+- "video-midpoint" : Fired when 50% of the video is played. 
+- "video-third-quartile" : Fired when 75% of the video is played. 
+- "video-complete" : Fired when 100% of the video is played. 
+- "video-session-end" : Fired when video is no more on the screen, it is possible for a video to loop after 100% playack is complete, in which case, video-exit and video-complete will occur at different times. 
+- "video-ad-start" : Fired when ad video has played 1 second 
+- "video-ad-end" : Fired when ad video finishes playing 
+- "video-click-cta" : Fired when user has clicked on the CTA ( not all video will have CTA ) 
+- "videoShare" : Fired when user has clicked on the share button
+- "videoStartError" : Fired when video playback encountered an error 
+- "videoAdStartError" : Fired when ad video playback encountered an error 
+
+Along with each event, you will also get the relevant data in the form of JSONObject. The data includes 
+
+"autoplay" : Boolean  -> describes if the video playack is autoplay
+"badge" : String -> badge will have value "ad" , if the playing video is ad video 
+"caption" : String -> title of the video playing
+"duration" : Long -> total duration of the video in miliseconds 
+"hashtags" : StringArray -> hashtags associated with the video 
+"has_cta" : Boolean -> does video have CTA ? 
+"height" : Int -> height of the video player 
+"width" : Int -> width of the video player 
+"video_id" : String -> encodedId of the video with which it is uniquely identified 
+"progress" : progress of video playback in miliseconds when the event occured 
+
+
+You can add VideoEventListener as below 
+
+	FwSDK.addVideoEventListener(object: FwSDK.VideoEventListener {
+            override fun event(eventName: String, jsonObject: JSONObject) {
                 
             }
         })
+
+
+[x] Item clicked callback 
+
+interface 
+You can listen to, when a user clicks on one of the video thumbnails in the feed to start watching the video. 
+
+	interface OnItemClickedListener {
+    		fun onItemClicked(index: Int, title: String, id: String, videoDuration: Float) 
+	}
 	
-    use for versions v4.2.8 and above 
-    videoFeedView.addOnItemClickedListener(object: OnItemClickedListener {
+    
+    	videoFeedView.addOnItemClickedListener(object: OnItemClickedListener {
                     override fun onItemClicked(
                         index: Int,
                         title: String,
@@ -285,56 +316,9 @@ The sdk provides two sets of callback, the code below is self explanatory .
                         Log.v("EventLog", " $index $title $id $videoDuration")
                     }
                 })
-		
 
-    @Deprecated from version v4.2.8 
-    FireworkSDK.addOnItemClickListener(object: VideoFeedAdapter.OnItemClickListener {
-   
-    	override fun onItemClicked(positionInFeed: Int, title: String, uniqueVideoId: String, duration: Float) {
-        	// called when user clicks on one of the thumbnails in the VideoFeedView
-    	}
-    })
-
-    FireworkSDK.addVideoPlaybackStatusListener(object: FireworkSDK.VideoPlaybackStatusListener {
-    	override fun buffering() {
-        	// video is bufferring 
-    	}
-
-    override fun playing() {
-	// video will begin playing 
-    }
-
-    override fun duration(duration: Long) {
-	// total duration of the video 
-    }
-
-    override fun completed() {
-	// the complete length of the video has been played 
-    }
-
-    override fun currentPosition(currentPosition: Long) {
-	// progress as the video is playing 
-    }
-
-    override fun nowPlaying(autoPlay:Boolean, index: Int, title: String, encodedId: String) {
-	// details of the video that will begin to play 
-    }
-    
-    over fun error(error:String) {
-    	// encourntered error while playing a video 
-    }
-    
-
-})
-
-	 FireworkSDK.addSdkStatusListener(object: FireworkSDK.SdkStatusListener {
-            override fun currentStatus(status: SdkStatus, extra: String) {
-                Log.v("StatusLog", " {sdk status details  ")
-            }
-
-        })
 	
-### Rewarded Video Callback
+### Rewarded Video Callback ( Most likely not applicable for your application ) 
 
 	/**
          * Called when user watches videos for enough duration and earn a reward
@@ -342,16 +326,13 @@ The sdk provides two sets of callback, the code below is self explanatory .
          * it can be null 
          * @param rewardAmount the number of firework coins that user earned. 
          */
-        FireworkSDK.addRewardListener(object: FireworkSDK.RewardListener {
+	 
+        FwSDK.addRewardListener(object: FireworkSDK.RewardListener {
             override fun rewardEarned(encodedId: String?, rewardAmount: Int) {
                 Log.v("AdLog", " $encodedId  --> $rewardAmount")
             }
 
         }, "{pass the unique user id (String) }" )
-
-
-### Pagination
-VideoFeedFragment as well as FireworkPlayerFragment will progressively load small chunk of data as user scrolls the feed ensuring optimized use of network bandwidth.  
 
 
 ### Common Errors 
