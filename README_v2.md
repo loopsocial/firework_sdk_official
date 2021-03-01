@@ -140,28 +140,39 @@ Here is an XML snippet of VideoFeedView that you can customize to your needs and
 			/> 
 			
 			
-				
-- {desired_width} : Specify the basic width of the view, this is required attribute. 
-- {desired_height} : Specify the basic height of the view, this is required attribute. 
+
+### Required Attributes
+
+[x] android:layout_width : Specify the basic width of the view, this is required attribute. 
+[x] android:layout_height : Specify the basic height of the view, this is required attribute. 
+[x] app:feedId : Any integer value to uniquely identify video feed.
 
 
-- app:feedLayout={grid | horizontal | vertical} : This attribute specifies the layout for displaying thumbnails. The possible values are 
+### Optional Attributes
+
+[x] app:feedLayout : This attribute specifies the layout for displaying video feed. The possible values are 
+
+- Grid
+- Horizontal
+- Vertical
+
+The default value is Horizontal
 		
-a. Grid -  Will layout video feed in a multiple ```rows> x <columns>``` format. 
-It will scroll vertically. If optional attribute ```app:columns``` is not specified, the default columm number is 2. 	
+a. Grid :  It layouts video feed in a multiple ```<rows> x <columns>``` format and scrolls vertically. The default column value is 2. 
+you can specify columns with xml attribute ```app:columns``` 	
 		
 <img src="screenshots/grid.jpg"  width="270" height="480"> <img src="screenshots/grid_with_title.jpg"  width="270" height="480">
 			
 			
-b. horizontal -  Will layout video feed as a single row and will function as a horizontal scrollable view.
+b. horizontal : It layouts video feed as a single row that works as a horizontal scrollable view.
 		  
 <img src="screenshots/Horizontal_video_list.png"  width="270" height="480">
 	
-c. vertical - Will layout video feed as a single column and will function as a vertical scrollable view.
+c. vertical : It layout video feed as a single column and functions as a vertical scrollable view.
 		
 <img src="screenshots/vertical.jpg"  width="270" height="480"> <img src="screenshots/vertical_with_title.jpg"  width="270" height="480">
 	
-We recommend using layout_height="match_parent" when feedLayout is specified as either Vertical or Grid and using definite height defined either as % of the parent viewgroup's height or specified in terms of dp when feedLayout is horizontal 
+We recommend using layout_height="match_parent" when feedLayout is specified as either Vertical or Grid. Use definite height defined either as % of the parent viewgroup's height or specified in terms of absolute value in dp when feedLayout is Horizontal 
 	       
 	       e.g 
 	       
@@ -175,11 +186,11 @@ We recommend using layout_height="match_parent" when feedLayout is specified as 
 		  
 		  layout_height="0dp" 
 		  app:layout_constraintHeight_default="percent"
-              	 app:layout_constraintHeight_percent="0.40"
+              	  app:layout_constraintHeight_percent="0.40"
 		 
-d. app:columns - This is an optional attribute and is only relevant if feedLayout is grid. It has default value of 2. 
+[x] app:columns : Use it to specify the number of columns for Grid layout. 
 
-e. app:showTitle - {true|false} This is an optional attribute. It can be either true or false. The default value is false. When true, video title is displayed. The position of the title is controlled by the attribute ```app:titlePosition```. The text style applied to title, can be specified with optional attribute ```app:textStyle```. 
+[x] app:showTitle : Use it to display video caption. If true, video caption is displayed, hidden otherwise. The default value is false.  The position of the title is controlled by the attribute ```app:titlePosition```. The text style applied to title, can be specified with optional attribute ```app:textStyle```. 
 
 f. app:textStyle - This is an optional attribute and when specified the style is applied to TextView displaying video title. If textStyle is not specified default style is applied. Below is the example of TextStyle usage. 
 	
