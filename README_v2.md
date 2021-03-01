@@ -320,19 +320,17 @@ You can listen to, when a user clicks on one of the video thumbnails in the feed
 	
 ### Rewarded Video Callback ( Most likely not applicable for your application ) 
 
-	/**
-         * Called when user watches videos for enough duration and earn a reward
-         * @param encodedId  Unique video id of firework video. If user watches advertsiement
-         * it can be null 
-         * @param rewardAmount the number of firework coins that user earned. 
-         */
-	 
+	Called when user watches videos for enough duration and earn a reward
+	
+	interface RewardListener {
+        	fun rewardEarned(encodedId: String?, rewardAmount: Int)
+    	}
+    
+	// Example 
         FwSDK.addRewardListener(object: FireworkSDK.RewardListener {
             override fun rewardEarned(encodedId: String?, rewardAmount: Int) {
-                Log.v("AdLog", " $encodedId  --> $rewardAmount")
             }
-
-        }, "{pass the unique user id (String) }" )
+        })
 
 
 ### Common Errors 
