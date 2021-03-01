@@ -105,11 +105,11 @@ You have to initialize Firework SDK before you can use any of its features. You 
         sdkStatusListener
  )
  
- applicationContext : provide application context , we don't require activity context. 
- clientId           : Pass the clientId provided to you by the business team you are working with. 
- userId(optional)   : An id to uniquely identify device or user. In case you pass null, Android_ID is used.
-                      If id passed is not unique, it will affect the quality of content recommended to the user. 
- sdkStatusListener  : Implementation of interface SdkStatusListener to track sdk events. 
+ - applicationContext : provide application context , we don't require activity context. 
+ - clientId           : Pass the clientId provided to you by the business team you are working with. 
+ - userId(optional)   : An id to uniquely identify device or user. In case you pass null, Android_ID is used.
+                        If id passed is not unique, it will affect the quality of content recommended to the user. 
+ - sdkStatusListener  : Implementation of interface SdkStatusListener to track sdk events. 
 
 
 ### Integrating video feed in your application.  
