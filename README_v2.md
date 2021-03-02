@@ -339,6 +339,7 @@ You can listen to, when a user clicks on one of the video thumbnails in the feed
 
 2. Blank feed - If there is mismatch between application id you provided  or app_id is wrong, authentication will fail and you won't see anything on the screen . You can check this condition using adb logcat | grep NetworkLog 
 
+3. Blank feed with Invalid channel id Toast - If feedType is set to channel and feedParam is invalid, you won't get video feeds. You can check your feedParam and make sure it is valid. 
 
 
 
