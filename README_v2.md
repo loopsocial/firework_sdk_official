@@ -229,7 +229,9 @@ We recommend using layout_height="match_parent" when feedLayout is specified as 
 
 [x] app:autoPlayOnFeed : You can enable autoplaying of the video without volume by setting app:autoPlayOnFeed to true. It is set to false by default.   
 
-[x] app:autoPlayOnComplete -  When set to true, the next video will start playing as soon as currently playing video finishes playing. When it is set to false, the currently playing video continues to play in the loop.  
+[x] app:autoPlayOnComplete :  When set to true, the next video will start playing as soon as currently playing video finishes playing. When it is set to false, the currently playing video continues to play in the loop.  
+
+[clip] app:clip : it controls the clipToPadding property of the recyclerView. Set it to true if you want to set clipToPadding to true , false otherwise. Default is false. 
 
 ### Event Callsback 
 
