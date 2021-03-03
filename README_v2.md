@@ -320,7 +320,7 @@ You can listen to, when a user clicks on one of the video thumbnails in the feed
                 })
 
 	
-### Rewarded Video Callback ( Most likely not applicable for your application ) 
+### Rewarded Video Callback 
 
 	Called when user watches videos for enough duration and earn a reward
 	
