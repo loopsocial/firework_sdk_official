@@ -306,7 +306,7 @@ interface
 You can listen to, when a user clicks on one of the video thumbnails in the feed to start watching the video. 
 
 	interface OnItemClickedListener {
-    		fun onItemClicked(index: Int, title: String, id: String, videoDuration: Float) 
+    		fun onItemClicked(index: Int, title: String, id: String, videoDuration: Long) 
 	}
 	
     
