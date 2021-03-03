@@ -244,11 +244,13 @@ interface SdkStatusCallback {
 }
 
 enum class SdkStatus() {
+
     - Initialized, // Sdk Initialized 
     - InitializationFailed, // Sdk initialization failed, in this case you shouldn't add VideoFeedView to your view hiearchy. Extra will describe the error. 
     - LoadingContent, // Sdk is requesting content from the server 
     - LoadingContentFailed, // Failed to load content, extra will have number of videos present in the feed at the time when error occured 
     - ContentLoaded // Content loaded successfully. 
+
 }
 
 
