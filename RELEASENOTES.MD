@@ -1,5 +1,15 @@
 # Release notes #
 
+## v5.1.4 
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21  
+
+### Enhancements 
+* [Api Added] : Api added to set channel_id at runtime in addition to compile time which is already supported via XML 
+
+
+
 ## v4.7.1 (2020-01-18) Recommended ## ( inherits 4.3.9 )
 1. Bug fixes
 2. ExoPlayer versino v2.11.7
