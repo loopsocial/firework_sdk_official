@@ -235,7 +235,9 @@ We recommend using layout_height="match_parent" when feedLayout is specified as 
 
 [x] app:feedType : It can be discover or channel , by default it is discover. When it is discover, recommendation engine serves content , when it is channel, you get content defined in that channel 
 
-[x] app:feedParam : If you have specified feedType to be channel, you have to enter the channel_id . Firework team you are working with , will provide you the channel_id. 
+[x] app:feedParam : If you have specified feedType to be channel, you have to enter the channel_id . Firework team you are working with , will provide you the channel_id. You can even programatically set feedParam. VideoFeedView provides an API to set feedParam as well as feedType. 
+
+setFeedParam(feedParam: String , feedType: FeedType)
 
 ### Event Callsback 
 
