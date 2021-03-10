@@ -333,12 +333,12 @@ You can listen to, when a user clicks on one of the video thumbnails in the feed
 	Called when user watches videos for enough duration and earn a reward
 	
 	interface RewardListener {
-        	fun rewardEarned(encodedId: String?, rewardAmount: Int)
+        	fun rewardEarned(encodedId: String?, caption:String?, rewardAmount: Int)
     	}
     
 	// Example 
         FwSDK.addRewardListener(object: FireworkSDK.RewardListener {
-            override fun rewardEarned(encodedId: String?, rewardAmount: Int) {
+            override fun rewardEarned(encodedId: String?, caption:String? , rewardAmount: Int) {
             }
         })
 
