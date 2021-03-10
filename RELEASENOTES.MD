@@ -1,5 +1,14 @@
 # Release notes #
 
+## v5.1.7 
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21
+
+### Bug Fix 
+* [authorized] : Race condition resulted in VideoFeedView not knowing about authorization status. It resulted in feed not being loaded. 
+
+
 ## v5.1.6
 
 * [Exoplayer Version] : v2.11.7
