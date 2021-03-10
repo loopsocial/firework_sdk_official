@@ -2,6 +2,16 @@
 
 ## v5.1.4 
 
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21  
+
+### Bug Fix 
+* [Rewards] : Rewards turned off that were turned on by default.  
+
+
+
+## v5.1.4 
+
 * [Exoplayer Version] : v2.12.1
 * [Android Minimum Support] : 21  
 
