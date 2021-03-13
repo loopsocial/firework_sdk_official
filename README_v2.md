@@ -98,12 +98,7 @@ https://github.com/loopsocial/firework_sdk_official/blob/master/RELEASENOTES.MD
 ### Initializing Firework SDK 
 You have to initialize Firework SDK before you can use any of its features. You should initialize Firework SDK when application is launched/created. 
 
- FwSDK.initialize(
-        applicationContext,
-        clientId,
-        userId,
-        sdkStatusListener
- )
+ #### FwSDK.initialize(applicationContext, clientId, userId, sdkStatusListener)
  
  - applicationContext : provide application context , we don't require activity context. 
  - clientId           : Pass the clientId provided to you by the business team you are working with. 
