@@ -1,5 +1,16 @@
 # Release notes #
 
+## v5.2.0
+
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Bug Fix
+
+* [user_id] : Fixed bug where Firework user_id was sent to lambda instead of guest_id ( provided by application ) 
+
+
 ## v5.1.9
 
 * [Exoplayer Version] : v2.11.7
