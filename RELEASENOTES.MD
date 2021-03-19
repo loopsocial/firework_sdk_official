@@ -1,5 +1,22 @@
 # Release notes #
 
+## v5.2.2
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Enhancements
+
+* [Video Player] : Change the user interface of the player, videos now play true to their aspect ratio. 
+* [Channel Playlist] : Added support for getting video feed from the playlist owned by a particular channel 
+* [API] : Added support to programatically set feedType, channelId and playlistId 
+
+### API details 
+
+* fun setChannel(channelId: String, feedType: FeedType)
+* fun setPlaylist(channelId: String, playlistId: String, feedType: FeedType) 
+
+
 ## v5.2.0
 
 
