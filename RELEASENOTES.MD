@@ -1,5 +1,25 @@
 # Release notes #
 
+## v5.2.7
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Bug Fix
+[Android O] : Crashed was caused on all devices with Android veresion less than O, it is fixed 
+
+
+
+## v5.2.5
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21
+
+### Bug Fix
+[Android O] : Crashed was caused on all devices with Android veresion less than O, it is fixed 
+
+
+
 ## v5.2.2
 
 * [Exoplayer Version] : v2.11.7
