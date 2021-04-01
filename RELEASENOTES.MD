@@ -1,5 +1,24 @@
 # Release notes #
 
+
+## v5.2.7
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Feature 
+* [ShareUrl] : You can now set the base url for the share url , for example https://example.com , When base url is set and user shares the video, 
+a custom url is shared. When anyone clicks on this url, you have opportunity to handle it in your own app and use FwSDK api  play(encodedParameters: String)
+to play video in your app, rather than playing it in the browser. 
+- setBaseUrl(baseUrl: String) 
+- play(encodedParameters: String) 
+
+
+### Bug Fix
+* [Networking] : Fixed uncaught exceptions - SocketTimeoutException, HostNotFoundException  
+
+
+
 ## v5.2.7
 
 * [Exoplayer Version] : v2.11.7
