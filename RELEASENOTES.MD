@@ -1,6 +1,16 @@
 # Release notes #
 
 
+## v5.3.2
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Bug Fix
+* [Networking] : Improved exception handling   
+* [Video Swipe] : Addressed race condition that will swipe 2 videos in place of just one video 
+
+
 
 ## v5.3.1
 
