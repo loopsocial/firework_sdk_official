@@ -1,5 +1,14 @@
 # Release notes #
 
+## v5.3.3
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Features
+* [CTA : clickHandler] : Provies application an option to handle CTA click
+
+
 
 ## v5.3.2
 
