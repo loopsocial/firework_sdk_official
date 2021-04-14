@@ -387,7 +387,16 @@ When a user clicks on the shared url and your application is installed on the us
 	Video will start playing. 
          
 	 
-	
+### Handle CTA click 
+
+You can now handle CTA click in the application. To listen to CTA clicked event, implement and add the CtaClickHandler interface . Here is an example you can refer to 
+
+	// return true if you have handled the event and do not want SDK to handle it and false when you want SDK to handle the  ctaClicked event. 
+	FwSDK.ctaClickHandler  = object : FwSDK.CtaClickHandler {
+            override fun ctaClicked(label: String, actionUrl: String?): Boolean {
+                return true
+            }
+        }
 	
 ### Common Errors 
 
