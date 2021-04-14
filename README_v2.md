@@ -336,8 +336,59 @@ You can listen to, when a user clicks on one of the video thumbnails in the feed
             override fun rewardEarned(encodedId: String?, caption:String? , rewardAmount: Int) {
             }
         })
+	
+	
+### Customize Share Feature
 
+The default share feature will share the video url that points user back to our domain fw.tv for playing the video. If you are hosting the shared video and you want to bring user with whom url is shared to url domain as opposed to fw.tv domain or try to open the shared url in the app itself ( if one is installed ) then you can customize the shared url. 
 
+Use api setSharedBaseUrl( sharedBaseUrl: String) to set your base domain e.g https://example.com/ 
+When you share a video, a shared url will look like the following 
+
+https://example.com#fwplayer=eyJjaGFubmVsX2lkIjoiTTJhMW5FIiwiZmVlZF9pZCI6NDIwLCJmZWVkX3R5cGUiOiJjaGFubmVsX3BlcnNvbmFsaXplZCIsInYiOjEsInZpZGVvX2lkIjoiNUVuem5LIn0
+
+## handling deeplink
+
+When a user clicks on the shared url and your application is installed on the user's device, then it is for you to open this video in the app. To achieve this add the following to your AndroidManifest.xml file. 
+
+	<activity
+            android:name=".ActivityYouWantToLaunch"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:launchMode="singleTop"
+            >
+	   <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="example.com" />
+            </intent-filter>
+	    
+	    
+	    When user clicks on the url, the activity `ActivityYouWantToLaunch` will get launched. In the onCreate method of the activity, you can check if activity launched due to user clicking on the deep link 
+	    
+	   val uri : Uri? = intent.data
+        	uri?.let {
+	
+              val launchedFromDeepLink = uri.scheme ?: "" in listOf(
+                    "http",
+                    "https"
+                ) && uri.host == "example.com"
+         }
+	 
+	 Once you confirm that activity is launched from deeplink, you can parse the data received the following way
+	 val parts = uri.toString().split("fwplayer=") to extract the payload that Firework SDK needs to start playing the video that was shared. 
+	 
+	 To play the video, you have to ensure that 
+	 
+	 * FireworkSDK is initialized ( FwSDK.initialize  successful )
+	 * call the api FwSDK. play(parts[1])
+
+	Video will start playing. 
+         
+	 
+	
+	
 ### Common Errors 
 
 1. When user clicks on one of the thumbnails from the video feed integrated in your application, FireworkSDK handles the onClick event and starts the video 	playback. If you have not already added PlaybackActivity to your AndroidManifest file, you should. The application will crash without it. 
