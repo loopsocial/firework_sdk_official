@@ -1,5 +1,16 @@
 # Release notes #
 
+
+## v5.3.7
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21
+
+### Improvements
+* [Lifecycle] :  Changes that eliminates explicitly calling FwSDK.onDestroy()
+
+
+
 ## v5.3.4
 
 * [Exoplayer Version] : v2.12.1
