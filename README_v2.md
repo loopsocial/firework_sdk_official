@@ -129,9 +129,10 @@ Here is an XML snippet of VideoFeedView that you can customize to your needs and
 	  			app:columns="{number_of_columns_if_your_feedLayout_is_grid, default value is 2}"
 	   			app:textStyle="@style/{your_text_style_video_title}"
 				app:imageStyle="@style/{your_image_style_video_thumbnail}"
-				app:feedType="{discover | channel}"
+				app:feedType="{discover | channel | playlist}" // please note that for feedType playlist, you need both channelId and playlistId. 
 				app:channelId="{channel id when feedType is channel}"
 				app:feedId={integer id to uniquely identify feed, it is different from view id}
+				app:playlistId="{playlist id when feedType is playlist} 
 			/> 
 			
 			
