@@ -1,5 +1,13 @@
 # Release notes #
 
+## v5.4.0
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21 
+
+### Features
+[Storyblock] : You can now directly launch the video player and configure the content ( no need for intermediate thumbnail view that user needs to click on ) 
+
+
 
 ## v5.3.7
 
