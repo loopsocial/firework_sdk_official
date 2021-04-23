@@ -1,5 +1,11 @@
 # Release notes #
 
+## v5.4.1
+
+### Bug Fix
+* [Video player] : fix the no action bar crash on the full screen player mode.
+
+
 ## v5.4.0
 * [Exoplayer Version] : v2.11.7
 * [Android Minimum Support] : 21 
