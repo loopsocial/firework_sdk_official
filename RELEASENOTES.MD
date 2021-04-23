@@ -3,7 +3,7 @@
 ## v5.4.1
 
 ### Bug Fix
-* [Video player] : fix the no action bar crash on the full screen player mode.
+* [Video player] : fix the no action bar crash on the full screen player mode on Android 6.0 or lower Android version.
 
 
 ## v5.4.0
