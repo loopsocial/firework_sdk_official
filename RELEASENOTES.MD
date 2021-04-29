@@ -2,8 +2,11 @@
 
 ## v5.4.1
 
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21 
+
 ### Bug Fix
-* [Video player] : fix the no action bar crash on the full screen player mode on Android 6.0 or lower Android version.
+* [Fullbleed Mode] :  Crash on Android 6 and lower fixed.
 
 
 ## v5.4.0
