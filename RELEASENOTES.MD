@@ -1,5 +1,16 @@
 # Release notes #
 
+
+## v5.4.3
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21 
+
+### Bug Fix
+* [Player Background Color] :  Changed player background color to #404040 from white. 
+
+
+
 ## v5.4.2
 
 * [Exoplayer Version] : v2.11.7
