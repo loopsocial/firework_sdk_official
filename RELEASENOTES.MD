@@ -1,6 +1,14 @@
 # Release notes #
 
 
+## v5.4.4
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21 
+
+### Improvement
+* [WebView] : Stopped handling SSLError and instead being delegated to super class. 
+
 ## v5.4.3
 
 * [Exoplayer Version] : v2.12.1
