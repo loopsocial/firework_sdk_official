@@ -48,6 +48,7 @@
 
 ### Features
 [Storyblock] : You can now directly launch the video player and configure the content ( no need for intermediate thumbnail view that user needs to click on ) 
+[ad] : Support for IMA SDK 
 
 
 
