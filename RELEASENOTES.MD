@@ -5,11 +5,14 @@
 
 * [Exoplayer Version] : v2.11.7
 * [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
 
 ## v5.4.4
 
 * [Exoplayer Version] : v2.12.1
 * [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
+
 
 ### Improvement
 * [WebView] : Stopped handling SSLError and instead being delegated to super class. 
@@ -18,6 +21,8 @@
 
 * [Exoplayer Version] : v2.12.1
 * [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
+
 
 ### Bug Fix
 * [Player Background Color] :  Changed player background color to #404040 from white. 
@@ -28,6 +33,8 @@
 
 * [Exoplayer Version] : v2.11.7
 * [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
+
 
 ### Bug Fix
 * [Player Background Color] :  Changed player background color to #404040 from white. 
