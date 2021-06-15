@@ -102,7 +102,7 @@ dependencies {
     //kapt 'com.github.bumptech.glide:compiler:4.4.0'
 
 
-   // implementation 'com.github.loopsocial:firework_sdk:v2.2.80x'
+    implementation 'com.github.loopsocial:firework_sdk:v4.7.8'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 

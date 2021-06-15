@@ -6,16 +6,16 @@ https://github.com/loopsocial/firework_sdk_official/blob/master/FireworkDemo.apk
 
 ### Prerequisites 
 To integrate FireworkSDK into your application, you have to register your application with Firework platform and get unique
-app_id. To get the app_id 
+clientId. To get the clientId 
 
 - [X] Provide your application's applicationId / package name to the business team / engineering team you are co-ordinating with. If your applicationId is different from package name, provide applicationId.
-- [X] We will email you the app_id.
+- [X] Our team will create clientId and share it with you.
 
-The app_id is used to authenticate your application with the server. Authentication will fail if your application's applicationId / package name is different from what you provided, or you use wrong app_id. 
+The clientId is used to authenticate your application with the server. Authentication will fail if your application's applicationId / package name is different from what you provided, or you use wrong clientId. 
  
 ### How to add library to your project? 
 
-Please select the appropriate version of firework sdk library. 
+Please select the appropriate version of firework sdk library. We currently support ExoPlayer version v2.9.6, v2.11.7, v2.12.1.
 
 https://github.com/loopsocial/firework_sdk_official/blob/master/RELEASENOTES.MD
 
@@ -38,12 +38,10 @@ https://github.com/loopsocial/firework_sdk_official/blob/master/RELEASENOTES.MD
 
 
 				// Service used for prefetching of next video , if all data for currently playing video is fetched. 
+				// If you do not want to enable prefetching, you can exclude thsi line from AndroidManifet.xml 
 				<service android:name="com.loopnow.fireworklibrary.views.CacheService" />
 				
-				// Instead of providing app_id in VideoFeedFragment xml , you can specify it in AndroidManifest.xml
-				<meta-data
-					android:name="Firework:AppID"
-					android:value="{app_id provided to you}" />
+			
 
 				// We plan on using advertising_id to improve target ads so that you can monetize better. 
 				// This is needed for to get advertising id using Android ad sdk.  
@@ -97,25 +95,31 @@ https://github.com/loopsocial/firework_sdk_official/blob/master/RELEASENOTES.MD
 		-keepclassmembers class com.loopnow.fireworklibrary.** { <fields>; }
 
 
+### Initializing Firework SDK 
+You have to initialize Firework SDK before you can use any of its features. You should initialize Firework SDK when application is launched/created. 
+
+ #### FwSDK.initialize(applicationContext, clientId, userId, sdkStatusListener)
+ 
+ - applicationContext : provide application context , we don't require activity context. 
+ - clientId           : Pass the clientId provided to you by the business team you are working with. 
+ - userId(optional)   : An id to uniquely identify device or user. In case you pass null, Android_ID is used.
+                        If id passed is not unique, it will affect the quality of content recommended to the user. 
+ - sdkStatusListener  : Implementation of interface SdkStatusListener to track sdk events. 
+
 
 ### Integrating video feed in your application.  
 
-There are two ways of playing Firework videos in your application.  
-1. Display video thumbnails in one of the three available layouts; Vertical, Horizontal & Grid and let user scroll through the thumbnails and click on any to play the video. Once video starts to play user can swipe left or right to play previous or next video. 
-
-2. In the second way, you can skip including the thumbnails and straight away start playing the video. User can swipe left or right to play previous or next video. 
-
-
-### The following section discusses method 1. 
-
 ### VideoFeedView 
-If you want to display video thumbnails and start playing the video only after user clicks on one of them, then dropping in VideoFeedView in your view hierarchy is the easiest and quickest way to integrate firework video feed into your app. VideoFeedView displays thumbnails in one of three supported layouts: 
+
+You can integrate video feed in your application by adding VideoFeedView to your view hiearachy. VideoFeedView is a custom android view. You can specify of of three layouts for the VideoFeedView. 
 
 - Vertical
 - Horizontal
 - Grid
 
-Here is an example of VideoFeedView that you can modify according to your needs and add to view hierarchy. 
+
+Here is an XML snippet of VideoFeedView that you can customize to your needs and add to your view hierarchy. 
+
 
 			<com.loopnow.fireworklibrary.views.VideoFeedView
 	   			android:layout_width="{desired_width}"
@@ -123,32 +127,48 @@ Here is an example of VideoFeedView that you can modify according to your needs 
 	   			app:showTitle="{true or false}"
 	   			app:feedLayout="{grid | horizontal | vertical}"
 	  			app:columns="{number_of_columns_if_your_feedLayout_is_grid, default value is 2}"
-				app:category="{This is in most case not required, please check with your account manager for available categories}"
 	   			app:textStyle="@style/{your_text_style_video_title}"
 				app:imageStyle="@style/{your_image_style_video_thumbnail}"
+				app:feedType="{discover | channel | playlist}" // please note that for feedType playlist, you need both channelId and playlistId. 
+				app:channelId="{channel id when feedType is channel}"
+				app:feedId={integer id to uniquely identify feed, it is different from view id}
+				app:playlistId="{playlist id when feedType is playlist} 
 			/> 
 			
 			
-				
-- {desired_width} : Specify the basic width of the view, this is required attribute. 
-- {desired_height} : Specify the basic height of the view, this is required attribute. 
-- app:feedLayout={grid | horizontal | vertical} : This attribute specifies the layout for displaying thumbnails. The possible values are 
+
+### Required Attributes
+
+[x] android:layout_width : Specify the basic width of the view, this is required attribute. 
+[x] android:layout_height : Specify the basic height of the view, this is required attribute. 
+[x] app:feedId : Any integer value to uniquely identify video feed.
+
+
+### Optional Attributes
+
+[x] app:feedLayout : This attribute specifies the layout for displaying video feed. The possible values are 
+
+- Grid
+- Horizontal
+- Vertical
+
+The default value is Horizontal
 		
-a. Grid -  Will layout video feed in a multiple ```rows> x <columns>``` format. 
-It will scroll vertically. If optional attribute ```app:columns``` is not specified, the default columm number is 2. 	
+a. Grid :  It layouts video feed in a multiple ```<rows> x <columns>``` format and scrolls vertically. The default column value is 2. 
+you can specify columns with xml attribute ```app:columns``` 	
 		
 <img src="screenshots/grid.jpg"  width="270" height="480"> <img src="screenshots/grid_with_title.jpg"  width="270" height="480">
 			
 			
-b. horizontal -  Will layout video feed as a single row and will function as a horizontal scrollable view.
+b. horizontal : It layouts video feed as a single row that works as a horizontal scrollable view.
 		  
 <img src="screenshots/Horizontal_video_list.png"  width="270" height="480">
 	
-c. vertical - Will layout video feed as a single column and will function as a vertical scrollable view.
+c. vertical : It layout video feed as a single column and functions as a vertical scrollable view.
 		
 <img src="screenshots/vertical.jpg"  width="270" height="480"> <img src="screenshots/vertical_with_title.jpg"  width="270" height="480">
 	
-We recommend using layout_height="match_parent" when feedLayout is specified as either Vertical or Grid and using definite height defined either as % of the parent viewgroup's height or specified in terms of dp when feedLayout is horizontal 
+We recommend using layout_height="match_parent" when feedLayout is specified as either Vertical or Grid. Use definite height defined either as % of the parent viewgroup's height or specified in terms of absolute value in dp when feedLayout is Horizontal 
 	       
 	       e.g 
 	       
@@ -162,13 +182,13 @@ We recommend using layout_height="match_parent" when feedLayout is specified as 
 		  
 		  layout_height="0dp" 
 		  app:layout_constraintHeight_default="percent"
-              	 app:layout_constraintHeight_percent="0.40"
+              	  app:layout_constraintHeight_percent="0.40"
 		 
-d. app:columns - This is an optional attribute and is only relevant if feedLayout is grid. It has default value of 2. 
+[x] app:columns : Use it to specify the number of columns for Grid layout. 
 
-e. app:showTitle - {true|false} This is an optional attribute. It can be either true or false. The default value is false. When true, video title is displayed. The position of the title is controlled by the attribute ```app:titlePosition```. The text style applied to title, can be specified with optional attribute ```app:textStyle```. 
+[x] app:showTitle : Use it to display video caption. If true, video caption is displayed, hidden otherwise. The default value is false.  The position of the title is controlled by the attribute ```app:titlePosition```. The text style applied to title, can be specified with optional attribute ```app:textStyle```. 
 
-f. app:textStyle - This is an optional attribute and when specified the style is applied to TextView displaying video title. If textStyle is not specified default style is applied. Below is the example of TextStyle usage. 
+[x] app:textStyle : Provide custom textStyle to be applied to TextView displaying video caption. Please refer below for an example and usage. 
 	
 	```app:textStyle="@style/VideoTitleStyle"```
 
@@ -183,10 +203,10 @@ f. app:textStyle - This is an optional attribute and when specified the style is
    	</style>
   
 
-g. app:titlePosition - {alignBottom:below}: When attribute showTitle is set to true, then app:titlePosition="alignBottom" will align the bottom of TextView displaying title to the bottom of the thumbnail and app:titlePosition="below" will align the top of the TextView displaying title to the bottom of the thumbnail. 
+[x] app:titlePosition : When attribute showTitle is set to true,  app:titlePosition="alignBottom" will align the bottom of TextView displaying title to the bottom of the thumbnail and app:titlePosition="below" will align the top of the TextView displaying title to the bottom of the thumbnail. 
 
 
-h. imageStyle - An optional attribute that can be used to define corner radius of the image. At present, only radius is supported. 
+[x] imageStyle : You can specify corner radus by providing image style. Refer to an example below. The default radius is 10dp 
 
 ```app:imageStyle="@style/ThumbnailStyle"```
 
@@ -194,64 +214,105 @@ h. imageStyle - An optional attribute that can be used to define corner radius o
 	       <item name="android:radius">12dp</item>
 	</style>
 	
-i. app:gutterSpace - When you use layout="grid", gutterSpace is the space between two consecutive columns & rows. By default it is 8dp but you can customize it. 
+[x] app:gutterSpace : When you use layout="grid", gutterSpace is the space between two consecutive columns & rows. By default it is 8dp but you can customize it. 
 
 		<com.loopnow.fireworklibrary.views.VideoFeedView"                  
 			app:gutterSpace="{your_desired_value e.g 4dp}"
         		/>
 
-j. app:itemLayout - In VideoFeedView, you can overwrite the default layout used for the feed items i.e thumbnail. Use attribute itemLayout to provide custom layout. 
 
-		<com.loopnow.fireworklibrary.views.VideoFeedView
-                  	app:itemLayout="@layout/{your_custom_layout}
-        		/>
-When you provide your custom layout, it is must that the layout includes TextView with id caption and ImageView with id thumbnail. 
+[x] app:enableShare : When set to true, ```Share``` feature is enabled. User can click on the share icon displayed at the bottom of the video to share the video url via apps that support sending text/url. It is enabled by default. You can disable it by setting it to false. 
 
-k. app:enableShare - {true|false} if you specify enableShare=true , then sharing of the video is enabled. Share icon is placed at the right|bottom. By default enableShare is true and you can disable it by setting enableShare=false
+[x] app:autoPlayOnFeed : You can enable autoplaying of the video without volume by setting app:autoPlayOnFeed to true. It is set to false by default.   
 
-l. app:category : In case you only want to display videos from certain categories, you can specify one category here. Please note that there are only few categories available and by selecting a categoy you could missing out on millions of amazing videos. Please check with your account manager for the available categories. It is better to not include this attribute, in which case our recommendation engine would recommend videos based on the user interest.  
-For example
-app:category="Food"
+[x] app:autoPlayOnComplete :  When set to true, the next video will start playing as soon as currently playing video finishes playing. When it is set to false, the currently playing video continues to play in the loop.  
 
-In case if you want to delay loading category and programatically set category, please include attribute 
-app:loadContent="false" in your XML defintion of VideoFeedView  and later set category programatically using VideoFeedView api loadContent("category name")
-e.g videoFeedView.loadContent("food")
+[x] app:clip : it controls the clipToPadding property of the recyclerView. Set it to true if you want to set clipToPadding to true , false otherwise. Default is false. 
 
-k. app:autoPlayOnFeed - {true | false } The default value is true.  In the VideoFeedView , one of the thumbnails will start playing video without audio and if you don't want this behavior you can turn it off by including this attribute in VideoFeedView. 
+[x] app:feedType : It can be discover or channel , by default it is discover. When it is discover, recommendation engine serves content , when it is channel, you get content defined in that channel 
 
-m. app:autoPlayOnComplete - { true | false } The default value is false. When video is playing in full screen mode, if you want next video to play as soon as the current one finishes playing then include this attribute in VideoFeedView and set value to true 
+[x] app:channelId : If you have specified feedType to be channel, you have to enter the channel_id . Firework team you are working with , will provide you the channel_id. You can even programatically set channelId. VideoFeedView provides an API to set channelId as well as feedType. 
+
+	setFeedParam(channelId: String , feedType: FeedType)
+
+### Event Callsback 
 
 
-### FireworkPlayerFragment 
-
-The first approach using VideoFeedFragment displays video thumbnails and plays video once user clicks on one of the thumbnails but if you don't want to display thumbnails and start playing the video right away, you should drop FireworkPlayerFragment into your view hierarchy. User can swipe right to go to next video and swipe left to go to previous video. 
-
-		<fragment android:layout_width="match_parent"
-            		android:layout_height="match_parent"
-            		android:name="com.loopnow.fireworklibrary.views.FireworkPlayerFragment"
-            		app:appid="{your_app_id}"
-            		android:id="@+id/{your_fragment_id}"
-            		android:tag="player_fragment"
-           		/>
+[x] Sdk Status Callback
 
 
+interface SdkStatusCallback {
+  fun currentStatus(status : SdkStatus, extra: String) 
+}
 
-### Callbacks 
+enum class SdkStatus() {
 
-The sdk provides two sets of callback, the code below is self explanatory . 
-     
-      FireworkSDK.addVideoPlaybackTracker(object: FireworkSDK.VideoPlaybackTracker {
-            override fun videoWatched(title: String, id: String, duration: Float) {
-                // title and duration for which video was  watched 
-            }
+    - Initialized, // Sdk Initialized 
+    - InitializationFailed, // Sdk initialization failed, in this case you shouldn't add VideoFeedView to your view hiearchy. Extra will describe the error. 
+    - LoadingContent, // Sdk is requesting content from the server 
+    - LoadingContentFailed, // Failed to load content, extra will have number of videos present in the feed at the time when error occured 
+    - ContentLoaded // Content loaded successfully, this is called just before data is presented to the user.
 
-            override fun nowPlaying(title: String, id: String, duration: Float) {
+}
+
+
+[x] Playback Event Callback 
+ 
+
+interface VideoEventListener {
+    fun event(eventName: String, jsonObject: JSONObject)
+}
+
+events : 
+
+- "video-impression" : Fired when video is shown to the user 
+- "video-start" : Fired when video has played 1 second 
+- "video-first-quartile" : Fired when 25% of the video is played.  
+- "video-midpoint" : Fired when 50% of the video is played. 
+- "video-third-quartile" : Fired when 75% of the video is played. 
+- "video-complete" : Fired when 100% of the video is played. 
+- "video-session-end" : Fired when video is no more on the screen, it is possible for a video to loop after 100% playack is complete, in which case, video-exit and video-complete will occur at different times. 
+- "video-ad-start" : Fired when ad video has played 1 second 
+- "video-ad-end" : Fired when ad video finishes playing 
+- "video-click-cta" : Fired when user has clicked on the CTA ( not all video will have CTA ) 
+- "videoShare" : Fired when user has clicked on the share button
+- "videoStartError" : Fired when video playback encountered an error 
+- "videoAdStartError" : Fired when ad video playback encountered an error 
+
+Along with each event, you will also get the relevant data in the form of JSONObject. The data includes 
+
+"autoplay" : Boolean  -> describes if the video playack is autoplay
+"badge" : String -> badge will have value "ad" , if the playing video is ad video 
+"caption" : String -> title of the video playing
+"duration" : Long -> total duration of the video in miliseconds 
+"hashtags" : StringArray -> hashtags associated with the video 
+"has_cta" : Boolean -> does video have CTA ? 
+"height" : Int -> height of the video player 
+"width" : Int -> width of the video player 
+"video_id" : String -> encodedId of the video with which it is uniquely identified 
+"progress" : progress of video playback in miliseconds when the event occured 
+
+
+You can add VideoEventListener as below 
+
+	FwSDK.addVideoEventListener(object: FwSDK.VideoEventListener {
+            override fun event(eventName: String, jsonObject: JSONObject) {
                 
             }
         })
+
+
+[x] Item clicked callback 
+
+interface 
+You can listen to, when a user clicks on one of the video thumbnails in the feed to start watching the video. 
+
+	interface OnItemClickedListener {
+    		fun onItemClicked(index: Int, title: String, id: String, videoDuration: Long) 
+	}
 	
-    use for versions v4.2.8 and above 
-    videoFeedView.addOnItemClickedListener(object: OnItemClickedListener {
+    
+    	videoFeedView.addOnItemClickedListener(object: OnItemClickedListener {
                     override fun onItemClicked(
                         index: Int,
                         title: String,
@@ -261,81 +322,90 @@ The sdk provides two sets of callback, the code below is self explanatory .
                         Log.v("EventLog", " $index $title $id $videoDuration")
                     }
                 })
-		
 
-    @Deprecated from version v4.2.8 
-    FireworkSDK.addOnItemClickListener(object: VideoFeedAdapter.OnItemClickListener {
-   
-    	override fun onItemClicked(positionInFeed: Int, title: String, uniqueVideoId: String, duration: Float) {
-        	// called when user clicks on one of the thumbnails in the VideoFeedView
+	
+### Rewarded Video Callback 
+
+	Called when user watches videos for enough duration and earn a reward
+	
+	interface RewardListener {
+        	fun rewardEarned(encodedId: String?, caption:String?, rewardAmount: Int)
     	}
-    })
-
-    FireworkSDK.addVideoPlaybackStatusListener(object: FireworkSDK.VideoPlaybackStatusListener {
-    	override fun buffering() {
-        	// video is bufferring 
-    	}
-
-    override fun playing() {
-	// video will begin playing 
-    }
-
-    override fun duration(duration: Long) {
-	// total duration of the video 
-    }
-
-    override fun completed() {
-	// the complete length of the video has been played 
-    }
-
-    override fun currentPosition(currentPosition: Long) {
-	// progress as the video is playing 
-    }
-
-    override fun nowPlaying(autoPlay:Boolean, index: Int, title: String, encodedId: String) {
-	// details of the video that will begin to play 
-    }
     
-    over fun error(error:String) {
-    	// encourntered error while playing a video 
-    }
-    
-
-})
-
-	 FireworkSDK.addSdkStatusListener(object: FireworkSDK.SdkStatusListener {
-            override fun currentStatus(status: SdkStatus, extra: String) {
-                Log.v("StatusLog", " {sdk status details  ")
+	// Example 
+        FwSDK.addRewardListener(object: FireworkSDK.RewardListener {
+            override fun rewardEarned(encodedId: String?, caption:String? , rewardAmount: Int) {
             }
-
         })
 	
-### Rewarded Video Callback
+	
+### Customize Share Feature
 
-	/**
-         * Called when user watches videos for enough duration and earn a reward
-         * @param encodedId  Unique video id of firework video. If user watches advertsiement
-         * it can be null 
-         * @param rewardAmount the number of firework coins that user earned. 
-         */
-        FireworkSDK.addRewardListener(object: FireworkSDK.RewardListener {
-            override fun rewardEarned(encodedId: String?, rewardAmount: Int) {
-                Log.v("AdLog", " $encodedId  --> $rewardAmount")
+The default share feature will share the video url that points user back to our domain fw.tv for playing the video. If you are hosting the shared video and you want to bring user with whom url is shared to url domain as opposed to fw.tv domain or try to open the shared url in the app itself ( if one is installed ) then you can customize the shared url. 
+
+Use api setSharedBaseUrl( sharedBaseUrl: String) to set your base domain e.g https://example.com/ 
+When you share a video, a shared url will look like the following 
+
+https://example.com#fwplayer=eyJjaGFubmVsX2lkIjoiTTJhMW5FIiwiZmVlZF9pZCI6NDIwLCJmZWVkX3R5cGUiOiJjaGFubmVsX3BlcnNvbmFsaXplZCIsInYiOjEsInZpZGVvX2lkIjoiNUVuem5LIn0
+
+## handling deeplink
+
+When a user clicks on the shared url and your application is installed on the user's device, then it is for you to open this video in the app. To achieve this add the following to your AndroidManifest.xml file. 
+
+	<activity
+            android:name=".ActivityYouWantToLaunch"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:launchMode="singleTop"
+            >
+	   <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="example.com" />
+            </intent-filter>
+	    
+	    
+	    When user clicks on the url, the activity `ActivityYouWantToLaunch` will get launched. In the onCreate method of the activity, you can check if activity launched due to user clicking on the deep link 
+	    
+	   val uri : Uri? = intent.data
+        	uri?.let {
+	
+              val launchedFromDeepLink = uri.scheme ?: "" in listOf(
+                    "http",
+                    "https"
+                ) && uri.host == "example.com"
+         }
+	 
+	 Once you confirm that activity is launched from deeplink, you can parse the data received the following way
+	 val parts = uri.toString().split("fwplayer=") to extract the payload that Firework SDK needs to start playing the video that was shared. 
+	 
+	 To play the video, you have to ensure that 
+	 
+	 * FireworkSDK is initialized ( FwSDK.initialize  successful )
+	 * call the api FwSDK. play(parts[1])
+
+	Video will start playing. 
+         
+	 
+### Handle CTA click 
+
+You can now handle CTA click in the application. To listen to CTA clicked event, implement and add the CtaClickHandler interface . Here is an example you can refer to 
+
+	// return true if you have handled the event and do not want SDK to handle it and false when you want SDK to handle the  ctaClicked event. 
+	FwSDK.ctaClickHandler  = object : FwSDK.CtaClickHandler {
+            override fun ctaClicked(label: String, actionUrl: String?): Boolean {
+                return true
             }
-
-        }, "{pass the unique user id (String) }" )
-
-
-### Pagination
-VideoFeedFragment as well as FireworkPlayerFragment will progressively load small chunk of data as user scrolls the feed ensuring optimized use of network bandwidth.  
-
-
+        }
+	
 ### Common Errors 
 
 1. When user clicks on one of the thumbnails from the video feed integrated in your application, FireworkSDK handles the onClick event and starts the video 	playback. If you have not already added PlaybackActivity to your AndroidManifest file, you should. The application will crash without it. 
 
 2. Blank feed - If there is mismatch between application id you provided  or app_id is wrong, authentication will fail and you won't see anything on the screen . You can check this condition using adb logcat | grep NetworkLog 
 
+3. Blank feed with Invalid channel id Toast - If feedType is set to channel and feedParam is invalid, you won't get video feeds. You can check your feedParam and make sure it is valid. 
 
 
 

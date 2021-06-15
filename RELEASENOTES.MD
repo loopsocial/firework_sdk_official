@@ -1,5 +1,229 @@
 # Release notes #
 
+
+## v5.4.5
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
+
+## v5.4.4
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
+
+
+### Improvement
+* [WebView] : Stopped handling SSLError and instead being delegated to super class. 
+
+## v5.4.3
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
+
+
+### Bug Fix
+* [Player Background Color] :  Changed player background color to #404040 from white. 
+
+
+
+## v5.4.2
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
+
+
+### Bug Fix
+* [Player Background Color] :  Changed player background color to #404040 from white. 
+
+
+## v5.4.1
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21 
+
+### Bug Fix
+* [Fullbleed Mode] :  Crash on Android 6 and lower fixed.
+
+
+## v5.4.0
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21 
+
+### Features
+[Storyblock] : You can now directly launch the video player and configure the content ( no need for intermediate thumbnail view that user needs to click on ) 
+[ad] : Support for IMA SDK 
+
+
+
+## v5.3.7
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21
+
+### Improvements
+* [Lifecycle] :  Changes that eliminates explicitly calling FwSDK.onDestroy()
+
+
+
+## v5.3.4
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21
+
+### Features
+* [CTA : clickHandler] : Provies application an option to handle CTA click
+
+
+## v5.3.3
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Features
+* [CTA : clickHandler] : Provies application an option to handle CTA click
+
+
+
+## v5.3.2
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Bug Fix
+* [Networking] : Improved exception handling   
+* [Video Swipe] : Addressed race condition that will swipe 2 videos in place of just one video 
+
+
+
+## v5.3.1
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21
+
+### Feature 
+* [ShareUrl] : You can now set the base url for the share url , for example https://example.com , When base url is set and user shares the video, 
+   a custom url is shared. When anyone clicks on this url, you have opportunity to handle it in your own app and use FwSDK api  play(encodedParameters: String)
+   to play video in your app, rather than playing it in the browser. 
+   
+
+
+### Bug Fix
+* [Networking] : Fixed uncaught exceptions - SocketTimeoutException, HostNotFoundException  
+
+
+## v5.3.0
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Feature 
+* [ShareUrl] : You can now set the base url for the share url , for example https://example.com , When base url is set and user shares the video, 
+   a custom url is shared. When anyone clicks on this url, you have opportunity to handle it in your own app and use FwSDK api  play(encodedParameters: String)
+   to play video in your app, rather than playing it in the browser. 
+   
+
+
+### Bug Fix
+* [Networking] : Fixed uncaught exceptions - SocketTimeoutException, HostNotFoundException  
+
+
+
+## v5.2.7
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Bug Fix
+[Android O] : Crashed was caused on all devices with Android veresion less than O, it is fixed 
+
+
+
+## v5.2.5
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21
+
+### Bug Fix
+[Android O] : Crashed was caused on all devices with Android veresion less than O, it is fixed 
+
+
+## Previous Versions 
+
+## v5.2.2
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Enhancements
+
+* [Video Player] : Change the user interface of the player, videos now play true to their aspect ratio. 
+* [Channel Playlist] : Added support for getting video feed from the playlist owned by a particular channel 
+* [API] : Added support to programatically set feedType, channelId and playlistId 
+
+### API details 
+
+* fun setChannel(channelId: String, feedType: FeedType)
+* fun setPlaylist(channelId: String, playlistId: String, feedType: FeedType) 
+
+
+## v5.2.0
+
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Bug Fix
+
+* [user_id] : Fixed bug where Firework user_id was sent to lambda instead of guest_id ( provided by application ) 
+
+
+## v5.1.9
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21
+
+### Bug Fix
+
+* [authorized] : Race condition resulted in VideoFeedView not knowing about authorization status. It resulted in feed not being loaded.
+
+
+## v5.1.7 
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21
+
+### Bug Fix 
+* [authorized] : Race condition resulted in VideoFeedView not knowing about authorization status. It resulted in feed not being loaded. 
+
+
+## v5.1.6
+
+* [Exoplayer Version] : v2.11.7
+* [Android Minimum Support] : 21  
+
+### Bug Fix 
+* [Rewards] : Rewards turned off that were turned on by default.  
+
+
+
+## v5.1.4 
+
+* [Exoplayer Version] : v2.12.1
+* [Android Minimum Support] : 21  
+
+### Enhancements 
+* [Api Added] : Api added to set channel_id at runtime in addition to compile time which is already supported via XML 
+
+
+## v4.7.7 (2020-01-18) Recommended ## ( inherits 4.7.1 )
+1. Bug fixes 
+2. ExoPlayer versino v2.11.7
+
+
 ## v4.7.1 (2020-01-18) Recommended ## ( inherits 4.3.9 )
 1. Bug fixes
 2. ExoPlayer versino v2.11.7
