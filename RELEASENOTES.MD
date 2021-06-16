@@ -1,6 +1,6 @@
 # Release notes #
 
-## v5.4.6
+## v5.4.7
 
 * [Exoplayer Version] : v2.13.3
 * [Android Minimum Support] : 19 
