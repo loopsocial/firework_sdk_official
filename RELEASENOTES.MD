@@ -1,5 +1,11 @@
 # Release notes #
 
+## v5.4.6
+
+* [Exoplayer Version] : v2.13.3
+* [Android Minimum Support] : 19 
+* [play-services-ads] : 19.5.0
+
 
 ## v5.4.5
 
