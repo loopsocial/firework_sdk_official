@@ -7,7 +7,7 @@
 * [play-services-ads] : 19.5.0
 
 ### Improvement
-* [FwSDK] : We changed the definition of initialize method. Earlier, one of the arguments `userId` was @Nullable. It is now must be non null. Please refer to the documentation.  Tab : Setup , Section: Intitializing SDK   
+* [FwSDK] : We changed the definition of initialize method. Earlier, one of the arguments `userId` was @Nullable. It is now must be non null. Please refer to the documentation.  Tab : Setup , Section: Intitializing SDK . https://docs.firework.tv/android-sdks/android
 
 
 ## v5.4.5
