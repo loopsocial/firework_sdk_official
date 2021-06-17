@@ -6,6 +6,9 @@
 * [Android Minimum Support] : 19 
 * [play-services-ads] : 19.5.0
 
+### Improvement
+* [FwSDK] : We changed the definition of initialize method. Earlier, one of the arguments `userId` was @Nullable. It is now must be non null. Please refer to the documentation.  Tab : Setup , Section: Intitializing SDK   
+
 
 ## v5.4.5
 
