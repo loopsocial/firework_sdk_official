@@ -25,6 +25,7 @@
             app:feedLayout="vertical"
             android:tag="vertical_fragment"
             app:showTitle="false"
+                app:feedType="discover"
             />
 
     </FrameLayout>

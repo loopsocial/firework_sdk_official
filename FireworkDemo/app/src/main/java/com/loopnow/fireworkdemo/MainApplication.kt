@@ -14,39 +14,61 @@ import java.security.MessageDigest
 
 @SuppressLint("HardwareIds")
 class MainApplication : Application() {
+    /**
+     * This is the client_id that you must have received from Firework. You must pass this
+     * in the intialize method.
+     */
+    private val clientId = "f6d6ec1275217f178cdff91363825cb390e038c1168f64f6efa23cb95ec6b325"
+
     companion object {
         val fwInitialized = MutableLiveData(false)
     }
 
-    private val clientId =  "f6d6ec1275217f178cdff91363825cb390e038c1168f64f6efa23cb95ec6b325" //"f6d6ec1275217f178cdff91363825cb390e038c1168f64f6efa23cb95ec6b325"
+    /**
+     * Firework SDK requires you pass the unique id for each of the users using
+     * your application. If you don't create a unque id for each user in your system
+     * you can use Android_ID. You can hash Android_ID in case there is any privacy concern.
+     * You can refer to the the function below to hash the Android_ID
+     */
     private val hashedUserId by lazy {
          getHash(Settings.Secure.getString(
             applicationContext.contentResolver,
             Settings.Secure.ANDROID_ID
         ))
-        //"PJ2398K"
     }
+
+    /**
+     * returns the hashed value of the string text
+     * @param text string to be hashed
+     */
+    private fun getHash(text: String) : String {
+       /* val digest: MessageDigest = MessageDigest.getInstance("SHA-256")
+        val hash: ByteArray = digest.digest(text.toByteArray(StandardCharsets.UTF_8))
+        Log.v("StatusLog", " ${text.length}  and  ${Base64.encodeToString(hash, Base64.DEFAULT).length} ")
+        return Base64.encodeToString(hash, Base64.DEFAULT)
+        */
+        return text
+    }
+
+    /**
+     * Initialize firework SDK in onCreate method.
+     * @param FwSdkStatusListener receive the SDK status update with the callback
+     * FwSDK.SdkStatusListener
+     *
+     */
     override fun onCreate() {
         super.onCreate()
         FwSDK.initialize(this, clientId, hashedUserId, object : FwSDK.SdkStatusListener {
             override fun currentStatus(status: SdkStatus, extra: String) {
+                Log.v("SdkStatusLog", "$status   -> $extra " )
                 when(status) {
                     SdkStatus.Initialized -> {
                         fwInitialized.value  = true
                     }
                 }
-
-
-                Log.v("StatusLog", "$status  ->>> $extra")
             }
         })
-
     }
 
-    private fun getHash(text: String) : String {
-        val digest: MessageDigest = MessageDigest.getInstance("SHA-256")
-        val hash: ByteArray = digest.digest(text.toByteArray(StandardCharsets.UTF_8))
-        Log.v("StatusLog", " ${text.length}  and  ${Base64.encodeToString(hash, Base64.DEFAULT).length} ")
-        return Base64.encodeToString(hash, Base64.DEFAULT)
-    }
+
 }

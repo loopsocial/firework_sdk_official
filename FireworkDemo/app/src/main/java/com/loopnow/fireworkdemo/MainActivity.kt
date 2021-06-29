@@ -30,22 +30,23 @@ import org.json.JSONObject
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
-    private val REQUEST_CODE_SETTING = 2002
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Check if activity is launched due to user clicking on the deeplink
+        // if activity is launched due to user clicking on the deeplink
+        // then refer to the code below for how to handle it and launch
+        // the player.
 
         val uri: Uri? = intent.data
+
         uri?.let {
             val openDeepLink = uri.scheme ?: "" in listOf(
                 "http",
                 "https"
             ) && uri.host == "yourbasedomain.com"
 
-            MainApplication.fwInitialized.observe(this, Observer {
+            // Until SDK is initialized
+            MainApplication.fwInitialized.observe(this, {
                 if (it && openDeepLink) {
                     val parts = uri.toString().split("fwplayer=")
                     if (parts.size > 1) {
@@ -55,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        window.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         setContentView(R.layout.activity_main)
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
@@ -69,20 +69,20 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        /*viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {}
             override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {}
             override fun onPageSelected(p0: Int) {
                 sectionsPagerAdapter.setCurrentPage(p0)
             }
-        })
+        })*/
 
         FwSDK.addVideoEventListener(object : FwSDK.VideoEventListener {
             override fun event(event: String, jsonObject: JSONObject) {
-                val duration = jsonObject.optInt("duration")
-                val currentPos = jsonObject.optDouble("progress")
-
-                Log.v("VideoEvent: ", "$event ->  $duration  :   $currentPos   ")
+                // placyback events and json payload
+                // refer to documentation for event details and payload
+                // https://docs.firework.tv/android-sdks/android
+                // tab playback events
             }
         })
 
@@ -90,18 +90,18 @@ class MainActivity : AppCompatActivity() {
         // can be handled as deeplink
         FwSDK.setBasePlayerUrl("https://yourbasedomain.com")
 
-        // If you were to handle the clicking of CTA yourself,
-        // this is how you will do it.
+        // If you were to handle the CTA click,
+        // Implement CtaClickHandler
+
         FwSDK.ctaClickHandler = object : FwSDK.CtaClickHandler {
+            /**
+             * return true if you handled, false if you want SDK to handle it.
+             */
             override fun ctaClicked(label: String, actionUrl: String?): Boolean {
-                // handle the click
-                // browsing to a particular product screen in the app
-                // whatever
                 return false
             }
         }
     }
-
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
@@ -131,39 +131,8 @@ class MainActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_setting -> {
-            //  var fragment = supportFragmentManager.findFragmentByTag("fragment_setting") ?: SettingFragment()
-            val intent = Intent(this, SettingsActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
 
-            this.startActivityForResult(intent, REQUEST_CODE_SETTING)
-            true
-        }
-        else -> {
-            false
-        }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_activity_actions, menu)
-        return true
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode == REQUEST_CODE_SETTING && resultCode == Activity.RESULT_OK) {
-            true -> {
-                data?.let {
-                    val bundleId = data.getStringExtra("bundle_id")
-                    val appId = data.getStringExtra("app_id")
-
-                    if (bundleId != null && appId != null) {
-                        FwSDK.overWriteApp(this.applicationContext, bundleId, appId)
-                    }
-                }
-            }
-        }
-    }
 }
 

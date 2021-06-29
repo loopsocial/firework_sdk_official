@@ -15,21 +15,19 @@ private val TAB_TITLES = arrayOf(
         R.string.pinned,
         R.string.grid,
         R.string.vertical,
-        R.string.player
-        //R.string.view
 )
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(private val context: Context, val fm: FragmentManager)
-    : FragmentPagerAdapter(fm) {
+@Suppress("DEPRECATION")
+class SectionsPagerAdapter(private val context: Context, private val fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     var current = 0
     var lastPage = 0
 
-    val fragmentMap = HashMap<Int, Fragment>()
+    private val fragmentMap = HashMap<Int, Fragment>()
 
 
     override fun getItem(position: Int): Fragment {
@@ -37,14 +35,12 @@ class SectionsPagerAdapter(private val context: Context, val fm: FragmentManager
         // Return a PlaceholderFragment (defined as a static inner class below).
 
         return when (position) {
-
             1 -> {
                 if (!fragmentMap.containsKey(position)) {
                     fragmentMap[position] = PinnedFragment.newInstance()
                 }
                 fragmentMap[position]!!
             }
-
             2 -> {
                 if (!fragmentMap.containsKey(position)) {
                     fragmentMap[position] = GridFragment.newInstance()
@@ -58,20 +54,6 @@ class SectionsPagerAdapter(private val context: Context, val fm: FragmentManager
                 fragmentMap[position]!!
             }
 
-            4 -> {
-                if (!fragmentMap.containsKey(position)) {
-                    val fragment = FireworkPlayerFragment()
-                    //fragment.autoPlay = false
-
-                    val bundle = Bundle()
-                    bundle.putString(Key.APP_ID, "BQEaIb9E80fiqAyaNQ5uv5_II5lXL3ET")
-
-                    fragment.arguments = bundle
-
-                    fragmentMap[position] = fragment
-                }
-                fragmentMap[position]!!
-            }
             else -> {
                 if (!fragmentMap.containsKey(position)) {
                     val fragment = IntegratedFragment.newInstance()
@@ -81,30 +63,6 @@ class SectionsPagerAdapter(private val context: Context, val fm: FragmentManager
             }
 
         }
-
-    }
-
-
-    fun setCurrentPage(page: Int) {
-        if(current == 4 ) {
-            (fragmentMap[4] as FireworkPlayerFragment).pausePlayback()
-        }
-
-        /*if(current == 5 ) {
-            (fragmentMap[5] as VideoViewFragment).pausePlayback()
-        }*/
-
-        lastPage = current
-        current = page
-
-        if(current == 4 ) {
-            (fragmentMap[4] as FireworkPlayerFragment).startPlayback()
-        }
-
-        /*if(current == 5 ) {
-            (fragmentMap[5] as VideoViewFragment).resumePlayback()
-        }*/
-
 
     }
 
