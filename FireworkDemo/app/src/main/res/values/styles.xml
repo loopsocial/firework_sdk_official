@@ -13,14 +13,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.FullScreen" parent="@style/AppTheme.NoActionBar">
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
 
-        <item name="android:textColorSecondary">@android:color/white</item>
-
-    </style>
 
     <style name="AppTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">?attr/colorAccent</item>
@@ -50,8 +43,35 @@
         <item name="android:layout_width">match_parent</item>
     </style>
 
-    <style name="ImageStyle" >
+    <style name="CustomImageStyle" >
         <item name="android:radius">12dp</item>
+    </style>
+
+    <style name="edit_setting" >
+        <item name="android:textColorHint">#ffa2a2a2</item>
+        <item name="android:textColor">#ff4a4a4a</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="label" >
+        <item name="android:textColor">#ff4a4a4a</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PlayButton" >
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:src">@drawable/play_icon</item>
+    </style>
+
+
+    <style name="CustomCaptionStyle">
+        <item name="android:textColor">#ffff6622</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
     </style>
 
 </resources>

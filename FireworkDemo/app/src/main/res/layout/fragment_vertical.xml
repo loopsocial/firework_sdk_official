@@ -22,10 +22,9 @@
             android:id="@+id/vertical_videofeed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:feedLayout="grid"
-            app:columns="3"
+            app:feedLayout="vertical"
             android:tag="vertical_fragment"
-            app:showTitle="true"
+            app:showTitle="false"
             />
 
     </FrameLayout>

@@ -18,35 +18,15 @@
         >
 
         <com.loopnow.fireworklibrary.views.VideoFeedView
-            android:id="@+id/integrated_videofeed"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:textStyle="@style/TitleStyle"
-            app:imageStyle="@style/ImageStyle"
-            app:titlePosition="below"
-            app:feedLayout="grid"
-            app:columns="2"
-            app:showTitle="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:feedLayout="grid"
+                app:showTitle="true"
+                app:titlePosition="below"
+                app:feedType="discover"
+                app:imageStyle="@style/CustomImageStyle"
+                app:textStyle="@style/CustomCaptionStyle"
             />
-
-
-      <!--  <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.loopnow.fireworklibrary.views.VideoFeedFragment"
-
-            app:appid="BQEaIb9E80fiqAyaNQ5uv5_II5lXL3ET"
-            app:page_type="feed"
-            app:bundle_id="com.loopnow.fireworkdemo"
-            android:id="@+id/grid_videofeed"
-            android:tag="grid_fragment"
-
-
-            />
--->
-
-
-
     </FrameLayout>
 
 

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data >
+        <variable
+                name="viewModel"
+                type="com.loopnow.fireworkdemo.SettingViewModel" />
+
+        <import type="androidx.lifecycle.MediatorLiveData" />
+        <variable
+                name="enableSave"
+                type="MediatorLiveData&lt;Boolean>" />
+        <variable
+                name="eventHandler"
+                type="com.loopnow.fireworkdemo.SettingsActivity" />
+
+    </data>
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        android:padding="@dimen/fw_padding_16"
+        >
+
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Bundle ID"
+            style="@style/label"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/label_bundle_id"
+            android:focusable="false"
+            android:clickable="false"
+
+        />
+
+    <EditText
+            android:layout_marginTop="@dimen/fw_padding_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="com.loopnow.FireworkDemo"
+            android:id="@+id/bundle_info"
+            style="@style/edit_setting"
+            app:layout_constraintTop_toBottomOf="@id/label_bundle_id"
+            android:paddingLeft="@dimen/fw_padding_8"
+            android:paddingRight="@dimen/fw_padding_8"
+            android:paddingTop="@dimen/fw_padding_4"
+            android:paddingBottom="@dimen/fw_padding_4"
+            android:background="@drawable/edit_text_rounded_bg"
+            app:bundleIdTextWatcher="@{viewModel.bundleIdTextWatcher}"
+
+
+        />
+
+
+    <TextView
+            android:layout_marginTop="@dimen/fw_padding_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter APP ID"
+            style="@style/label"
+            app:layout_constraintTop_toBottomOf="@id/bundle_info"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/label_app_id"
+            android:focusable="false"
+            android:clickable="false"
+            />
+
+
+    <EditText
+            android:layout_marginTop="@dimen/fw_padding_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="BQEaIb9E80fiqAyaNQ5uv5_II5lXL3ET"
+            android:id="@+id/app_info"
+            style="@style/edit_setting"
+            app:layout_constraintTop_toBottomOf="@id/label_app_id"
+            android:paddingLeft="@dimen/fw_padding_8"
+            android:paddingRight="@dimen/fw_padding_8"
+            android:paddingTop="@dimen/fw_padding_4"
+            android:paddingBottom="@dimen/fw_padding_4"
+            android:background="@drawable/edit_text_rounded_bg"
+            app:appIdTextWatcher="@{viewModel.appIdTextWatcher}"
+
+
+            />
+
+    <TextView
+            android:layout_marginTop="@dimen/fw_padding_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/save_button_bg_selector"
+            android:text="Save"
+            android:textColor="#ffffffff"
+            android:textSize="16dp"
+            android:paddingLeft="@dimen/fw_padding_16"
+            android:paddingRight="@dimen/fw_padding_16"
+            android:paddingTop="@dimen/fw_padding_4"
+            android:paddingBottom="@dimen/fw_padding_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_info"
+            android:clickable="true"
+            android:focusable="true"
+            android:enabled="@{enableSave}"
+            android:onClick="@{ (v) -> eventHandler.saveButtonClicked(v,viewModel.bundleId, viewModel.appId)}"
+
+
+
+            />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

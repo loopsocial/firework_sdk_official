@@ -11,22 +11,22 @@
 
     <FrameLayout android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="@dimen/padding_8"
+        android:padding="@dimen/fw_padding_8"
         android:id="@+id/pinned_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.30"
         app:layout_constraintBottom_toBottomOf="parent"
-
         >
-
 
         <com.loopnow.fireworklibrary.views.VideoFeedView
             android:id="@+id/integrated_videofeed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:feedLayout="horizontal"
+                app:autoPlayOnComplete="true"
+                app:category="Arts &amp; Culture"
             />
 
 

@@ -1,13 +1,9 @@
 package com.loopnow.fireworkdemo.adapters
 
-
-
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 
 import android.view.View
-
-import com.loopnow.fireworklibrary.Video
 
 import java.util.*
 import kotlin.collections.ArrayList
@@ -15,13 +11,11 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.viewpager.widget.PagerAdapter
 import com.loopnow.fireworkdemo.R
-import com.loopnow.fireworklibrary.FireworkSDK
-import com.loopnow.fireworklibrary.FireworkSDK.Companion.debug
+
+import com.loopnow.fireworklibrary.FwSDK
 import com.loopnow.fireworklibrary.views.VideoView
 
-
-class PlaybackViewAdapter(val context: Context, val sdk: FireworkSDK) : PagerAdapter() {
-
+class PlaybackViewAdapter(val context: Context, val sdk: FwSDK) : PagerAdapter() {
 
     var videoList = ArrayList<String>()
     var currentVideo = -1
@@ -31,7 +25,6 @@ class PlaybackViewAdapter(val context: Context, val sdk: FireworkSDK) : PagerAda
         return p0 == p1
     }
 
-
     fun setData(videos: List<String>) {
         this.videoList.addAll(videos)
 
@@ -40,13 +33,14 @@ class PlaybackViewAdapter(val context: Context, val sdk: FireworkSDK) : PagerAda
     override fun instantiateItem(collection: ViewGroup, position: Int): Any {
         val video = videoList[position]
         val inflater = LayoutInflater.from(context)
-        val layout = inflater.inflate(R.layout.playbackview_item, collection, false) as ViewGroup
+        val layout = inflater.inflate(R.layout.fw_playbackview_item, collection, false) as ViewGroup
         layout.background = ColorDrawable(getRandomColor())
 
         val videoView = if(layout.childCount > 0) layout.getChildAt(0) as VideoView else null
 
         videoView?.apply {
-            setVideo(position,video, sdk)
+            //@todo
+           // setVideo(position,video, embedInstance)
         } ?: run {
         }
         collection.addView(layout)

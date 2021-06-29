@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/parent_layout"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:padding="@dimen/padding_8"
-    android:orientation="vertical"
-    >
-
-
-    <com.loopnow.fireworklibrary.views.VideoFeedView
-        android:id="@+id/integrated_videofeed"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/parent_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:feedLayout="horizontal"
-        />
+        android:layout_height="240dp"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/padding_8"
+        android:paddingBottom="@dimen/padding_8">
+
+        <com.loopnow.fireworklibrary.views.VideoFeedView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:feedType="channel"
+                app:channelId="YM0wyz"
+            />
 
 </FrameLayout>
+
+<!--
+app:channelId="m4rgaux"
+                app:playlistId="VoBVoL"
+        app:channelId="LRY1GX"
+        app:playlistId="5zJPN5"
+        app:itemLayout="@layout/custom_video_item"
+        app:feedId="420"
+        app:feedType="channel"
+        app:channelId="nB4NRj"  // poster test
+        app:feedParam="v7N8Dx"  //hdfashiontv
+        app:feedParam="EKwaGk"  //BBB21
+-->

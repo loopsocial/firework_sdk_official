@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_enabled="true"
+	android:drawable="@drawable/fw_rounded_bg_25_fill"
+	/>
+
+        <item
+        android:state_enabled="false"
+
+				android:drawable="@drawable/rounded_bg_25_fill_50"
+
+				/>
+
+
+</selector>
