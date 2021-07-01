@@ -1,5 +1,20 @@
 # Release notes #
 
+## v5.5.1
+
+* [Android Minimum Support] : 21 
+* [play-services-ads] : 19.5.0
+
+### Improvement
+* [Video Player] : We improved the player UX 
+* [ExoPlayer] : You can provide the exoplayer dependency , instead of picking up Firework SDK supporting specific version of Exoplayer. Pleae refer to https://docs.firework.tv/android-sdks/android  and tab setup for more details. 
+* [guest_id] : We now persist the guest_id you pass during initialization. In the subsequent app launches, if you pass the different guest_id, SDK will continue to use the guest_id , you used the first time. 
+
+### Bug Fixes
+* [Visitor Events] : We fixed the error that caused some of the events reporting to not get fired. 
+
+
+
 ## v5.4.7
 
 * [Exoplayer Version] : v2.13.3
