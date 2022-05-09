@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_layout"
+    >
+
+    <com.loopnow.fireworklibrary.views.FireworkImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintDimensionRatio="4:9"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:id="@+id/thumbnail"/>
+
+    <ImageView style="@style/PlayButton"
+        app:layout_constraintStart_toStartOf="@id/thumbnail"
+        app:layout_constraintEnd_toEndOf="@id/thumbnail"
+        app:layout_constraintTop_toTopOf="@id/thumbnail"
+        app:layout_constraintBottom_toBottomOf="@id/thumbnail"
+        android:id="@+id/play_button"
+		android:visibility="gone"/>
+
+    <TextView
+		  android:layout_width="0dp"
+	      android:layout_height="wrap_content"
+	      app:layout_constraintBottom_toBottomOf="@id/thumbnail"
+	      app:layout_constraintStart_toStartOf="@id/thumbnail"
+		  app:layout_constraintEnd_toEndOf="@id/thumbnail"
+	      android:maxLines="2"
+	      android:id="@+id/caption"
+	      android:gravity="bottom"
+		  android:textSize="16dp"
+		  android:textColor="#FF00FF"
+		  android:textStyle="bold"
+		  android:padding="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

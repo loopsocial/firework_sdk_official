@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Firework SDK Demo</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="integrated">Integrated</string>
+    <string name="pinned">Pinned</string>
+    <string name="grid">Grid</string>
+    <string name="fullscreen">Fullscreen</string>
+    <string name="vertical">Vertical</string>
+    <string name="player">Player</string>
+    <string name="view">VideoView</string>
+</resources>
