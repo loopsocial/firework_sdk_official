@@ -111,7 +111,32 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
 
         addOnPlayerVideoContentStatusListener()
+
+        //Shoppable video interface.
         addBAYA()
+
+        //Live stream callbacks.
+        addLiveStreamListener()
+    }
+
+    private fun addLiveStreamListener() {
+        FireworkLiveStream.addFireworkLiveStreamEventListener(object: FireworkLiveStreamEventListener {
+            override fun userJoined(liveStreamDetails:FireworkLiveStreamEventDetails) {
+                //Trigger when user join the live stream.
+            }
+
+            override fun userLeft(liveStreamDetails:FireworkLiveStreamEventDetails) {
+                //Trigger when user leave the live stream.
+            }
+
+            override fun userSentChat(chatDetails: FireworkLiveStreamChatDetails) {
+                //Trigger when livestream receives a chat message.
+            }
+
+            override fun userSentLike(liveStreamDetails: FireworkLiveStreamEventDetails) {
+                //Trigger when livestream receives a LIKE click.
+            }
+        })
     }
 
     private fun addBAYA() {

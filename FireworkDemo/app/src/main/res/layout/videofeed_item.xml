@@ -11,7 +11,8 @@
         <com.loopnow.fireworklibrary.views.VideoFeedView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:feedType="discover"
+                app:feedType="playlist"
+                app:playlistId="g4lA0g"
+                app:channelId="o8l83w"
             />
-
 </FrameLayout>
