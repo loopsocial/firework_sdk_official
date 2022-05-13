@@ -4,6 +4,22 @@
 
 * [Android Minimum Support] : 21
 
+
+### [Feature]:
+
+* Introduce a new programmatically feed type: Dynamic content. Learn more from [integration doc](https://docs.firework.tv/android-sdks/android/video-feed/dynamic-content).
+
+### [Improvements]:
+
+* Disable system volume toast while volume changes.
+* Fixed reveal video height doesn't fit screen height on the video fit mode.
+
+
+
+## v5.11.5
+
+* [Android Minimum Support] : 21
+
 ### [Bug]:
 * Fixed crash caused by quickly double tapping videos with AD in feed.
 
