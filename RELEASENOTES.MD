@@ -1,6 +1,6 @@
 # Release notes #
 
-## v5.11.5
+## v5.12.0
 
 * [Android Minimum Support] : 21
 
