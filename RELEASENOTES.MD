@@ -6,7 +6,7 @@
 
 ### [Bug fixes]:
 
-* Fixed autoplay doesn't play proeprly after introducing livestream feature.
+* Fixed autoplay doesn't play properly after introducing livestream feature.
 * Fixed multiple out of index exceptions relate to videos with products.
 
 
