@@ -1,5 +1,22 @@
 # Release notes #
 
+## v5.12.3
+
+* [Android Minimum Support] : 21
+
+### [Bug fixes]:
+
+* Fixed autoplay doesn't play proeprly after introducing livestream feature.
+* Fixed multiple out of index exceptions relate to videos with products.
+
+
+### [Improvements]:
+
+* Display the corresponding product unit option thumbnail while users select other unit options.
+* Add video title to onItemClick() in playlist group feed type.
+* Support playlist group custom layout.
+
+
 ## v5.12.0
 
 * [Android Minimum Support] : 21
