@@ -1,5 +1,21 @@
 # Release notes #
 
+## v5.13.0
+
+* [Android Minimum Support] : 21
+
+### [Features]:
+* Support Arabic translations.
+* Support RTL.
+* Support product unit option hydration in shoppable videos.
+
+### [Improvement]:
+* Chat messages capabilities enhancement for taking care of robust message volume on active live streams. 
+
+### [Bug fixes]:
+* Video fit mode: The top of player view got cut off by dismiss status bar UI issue on Android 10 or earlier Android version devices. 
+
+
 ## v5.12.3
 
 * [Android Minimum Support] : 21
