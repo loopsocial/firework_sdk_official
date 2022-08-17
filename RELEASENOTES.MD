@@ -1,5 +1,23 @@
 # Release notes #
 
+## v5.14.0
+
+* [Android Minimum Support] : 21
+
+### [Features]:
+* Introduce a new programmatically feed layout: Storyblock. Learn more from [integration doc](https://docs.firework.tv/android-sdks/android/storyblock).
+* Customize ADA announcement.
+
+### [Improvement]:
+* RTL support follows with device language but not application language.
+* UIs: add space between currency symbol and amount for shoppable videos.
+
+### [Bug fixes]:
+* Feed refresh() doesn’t function properly on the dynamic content feed type.
+* The live stream chat box placeholder always shows the same username. 
+* Mute/unmute control should be on the player level but not the system media level.
+
+
 ## v5.13.0
 
 * [Android Minimum Support] : 21
