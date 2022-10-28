@@ -1,5 +1,15 @@
 # Release notes #
 
+## v5.14.5
+
+* [Android Minimum Support] : 21
+
+### [Improvement]:
+* Talkback annoucement on the player view componements.
+* Add product impressions events.
+* Extended product "Add to cart" timeout to 10s.
+
+
 ## v5.14.0
 
 * [Android Minimum Support] : 21
