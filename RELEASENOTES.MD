@@ -4,7 +4,7 @@
 
 * [Android Minimum Support] : 21
 
-### [Improvement]:
+### [Improvements]:
 * Talkback annoucement on the player view componements.
 * Add product impressions events.
 * Extended product "Add to cart" timeout to 10s.
@@ -18,7 +18,7 @@
 * Introduce a new programmatically feed layout: Storyblock. Learn more from [integration doc](https://docs.firework.tv/android-sdks/android/storyblock).
 * Customize ADA announcement.
 
-### [Improvement]:
+### [Improvements]:
 * RTL support follows with device language but not application language.
 * UIs: add space between currency symbol and amount for shoppable videos.
 
