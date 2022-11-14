@@ -1,5 +1,20 @@
 # Release notes #
 
+## v5.14.7
+
+* [Android Minimum Support] : 21
+
+### [Improvement]:
+* Add video playback control for navigating to previous/next video when Talkback is on.
+
+
+## v5.14.6
+
+* [Android Minimum Support] : 21
+
+### [Bug fix]:
+* Fixed the share link in the livestream plays a livestream recording instead of a trailer.
+
 ## v5.14.5
 
 * [Android Minimum Support] : 21
