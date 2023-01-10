@@ -1,5 +1,30 @@
 # Release notes #
 
+## v5.14.10
+
+* [Android Minimum Support] : 21
+
+### [Improvement]:
+* Product currency localization in the livestream videos.
+
+
+## v5.14.9
+
+* [Android Minimum Support] : 21
+
+### [Bug fix]:
+* Fixed base share url doesn't apply to livestream videos.
+* Fixed CTA button with null text.
+
+
+## v5.14.8
+
+* [Android Minimum Support] : 21
+
+### [Improvement]:
+* Improve ADA announcement in the video player and share screen.
+
+
 ## v5.14.7
 
 * [Android Minimum Support] : 21
