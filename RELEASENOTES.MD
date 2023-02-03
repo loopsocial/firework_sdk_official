@@ -1,5 +1,20 @@
 # Release notes #
 
+## v5.14.12
+
+* [Android Minimum Support] : 21
+
+### [Features]:
+* Support in-app language settings. Learn more from [integration doc](https://docs.firework.tv/android-sdks/android/in-app-language-settings).
+
+## v5.14.11
+
+* [Android Minimum Support] : 21
+
+### [Bug fix]:
+* Fixed product card showing duplicate currency issue. 
+* Updated product unit image when users select on the different product unit.
+
 ## v5.14.10
 
 * [Android Minimum Support] : 21
