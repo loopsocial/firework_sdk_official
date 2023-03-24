@@ -1,5 +1,34 @@
 # Release notes #
 
+
+## v5.14.15
+
+* [Android Minimum Support] : 21
+
+### [Improvement]:
+* Update Firework branding.
+
+### [Bug fix]:
+* Fixed VideoPlayerProperties.launchPlayerWithMute flag doesn't function properly when player launches.
+* Fixed mute/unmute state changes doesn't apply to some videos.
+
+
+## v5.14.14
+
+* [Android Minimum Support] : 21
+
+### [Bug fix]:
+* Fixed playlist group feed doesn't load due to API updates.
+
+
+## v5.14.13
+
+* [Android Minimum Support] : 21
+
+### [Bug fix]:
+* Fixed requestWindow() compatible issue. 
+
+
 ## v5.14.12
 
 * [Android Minimum Support] : 21
