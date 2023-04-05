@@ -1,5 +1,12 @@
 # Release notes #
 
+## v5.14.16
+
+* [Android Minimum Support] : 21
+
+### [Improvement]:
+* Address medium level of security warnings from Veracode scan.
+
 
 ## v5.14.15
 
